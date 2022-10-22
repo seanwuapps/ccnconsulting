@@ -1,8 +1,8 @@
 <template>
   <go-hero
     :heading="content.hero.heading"
-    :imgSrc="content.hero.img"
-    :imgAlt="content.hero.imgAlt"
+    img-src="/img/hero.svg"
+    img-alt="Hero section illustration"
     class="hero"
   >
     <go-md
