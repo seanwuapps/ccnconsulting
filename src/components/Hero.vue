@@ -5,7 +5,10 @@
     :imgAlt="content.hero.imgAlt"
     class="hero"
   >
-    <go-md :content="content.hero.description"></go-md>
+    <go-md
+      md-options="{html: true}"
+      :content="content.hero.description"
+    ></go-md>
   </go-hero>
 </template>
 
@@ -24,6 +27,9 @@ export default defineComponent({
 
 <style lang="scss">
 go-hero {
+  --hero-padding-top: 10vh;
+  --hero-padding-bottom: 10vh;
+  position: relative;
   background: linear-gradient(
     to bottom,
     var(--hero-bg-color) 0,
@@ -32,9 +38,15 @@ go-hero {
   .hero-image {
     text-align: right;
     .featured-img {
-      width: auto;
-      height: 25rem;
+      transform: translateY(0);
+      animation: float 3s ease-in-out infinite alternate;
+      max-width: 100%;
     }
+  }
+}
+@keyframes float {
+  to {
+    transform: translateY(-1rem);
   }
 }
 </style>

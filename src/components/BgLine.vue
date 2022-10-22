@@ -57,7 +57,6 @@ export default defineComponent({
     setSvgHeight(contentEl: HTMLElement, svg: HTMLElement) {
       const contentH = contentEl.getBoundingClientRect().height;
       svg.style.height = contentH + "px";
-      console.log(contentEl.getBoundingClientRect().height);
     },
   },
 });
@@ -65,13 +64,15 @@ export default defineComponent({
 <style lang="scss" scoped>
 .bg-line-container {
   position: absolute;
-  right: 0;
+  width: 100%;
+  right: 50%;
+  transform: translateX(50%);
   overflow: hidden;
   z-index: -1;
   svg.bg-line {
-    transform: translateY(-2%);
     width: auto;
     min-width: 400px;
+    transform: translateY(-1rem);
     path {
       stroke: var(--ccn-primary-color-50);
       stroke-width: 0.25rem;

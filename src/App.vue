@@ -7,6 +7,7 @@ import Features from "./components/Features.vue";
 import BgLine from "./components/BgLine.vue";
 import content from "./content";
 import ContactUs from "./components/ContactUs.vue";
+import Footer from "./components/Footer.vue";
 </script>
 
 <template>
@@ -27,16 +28,18 @@ import ContactUs from "./components/ContactUs.vue";
       <ContactUs />
     </div>
   </div>
-
+  <Footer />
   <go-to-top></go-to-top>
 </template>
 
 <style lang="scss">
 @import "@go-ui/core/src/global/scss/utils";
+html {
+  overflow-x: hidden;
+}
 :root {
   --ccn-primary-color: #208388;
   --ccn-primary-color-50: #{rgba(#208388, 0.5)};
-  --go-color-primary-600: var(--ccn-primary-color);
   --go-heading-font-family: "Cormorant Garamond", serif;
 }
 .section > h2 {
@@ -48,6 +51,16 @@ import ContactUs from "./components/ContactUs.vue";
 }
 .section {
   padding: 10rem var(--go-outer-gutter, 0.5rem);
-  min-height: 50vh;
+  @include tablet {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+}
+.row {
+  width: 100%;
 }
 </style>

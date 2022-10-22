@@ -1,30 +1,6 @@
 <template>
   <header>
-    <go-nav-drawer
-      ref="mobileMenu"
-      label="Menu"
-      :items.prop="navItems"
-      autoClose
-    ></go-nav-drawer>
     <go-header-bar breakpoint="tablet">
-      <go-button
-        slot="mobile-menu-trigger"
-        aria-labelledby="menu-label"
-        compact
-        flat
-        stack
-        variant="text"
-        @click="handleMobileTriggerClick"
-      >
-        <go-icon
-          icon-set="bx"
-          name="menu"
-          size="1.5rem"
-          slot="prefix"
-        ></go-icon>
-        <span id="menu-label">Menu</span>
-      </go-button>
-
       <go-gov-au-logo slot="logo">
         <img slot="main-brand" :src="logoSrc" alt="CCN PTY LTD" />
         <img slot="main-brand-on-dark" :src="logoSrc" alt="CCN PTY LTD" />
