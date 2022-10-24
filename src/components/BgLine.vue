@@ -65,14 +65,17 @@ export default defineComponent({
 .bg-line-container {
   position: absolute;
   width: 100%;
-  right: 50%;
-  transform: translateX(50%);
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
   overflow: hidden;
   z-index: -1;
+
   svg.bg-line {
     width: auto;
     min-width: 400px;
-    transform: translateY(-1rem);
+    transform: translate(10%, -1rem);
     path {
       stroke: var(--ccn-primary-color-50);
       stroke-width: 0.25rem;

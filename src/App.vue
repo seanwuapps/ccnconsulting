@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import Header from "./components/Header.vue";
 import Hero from "./components/Hero.vue";
 import Features from "./components/Features.vue";
@@ -8,6 +6,13 @@ import BgLine from "./components/BgLine.vue";
 import content from "./content";
 import ContactUs from "./components/ContactUs.vue";
 import Footer from "./components/Footer.vue";
+console.clear();
+console.groupCollapsed("Hey 😎!");
+console.log(`
+If you are looking at this out of force of habits, send us an email to console@ccnconsulting.com.au and let's go get a coffee, it's on us.
+PS. If you liked our website, check out the UI library we used https://go-ui.com
+`);
+console.groupEnd();
 </script>
 
 <template>
