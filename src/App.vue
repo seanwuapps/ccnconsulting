@@ -8,10 +8,15 @@ import ContactUs from "./components/ContactUs.vue";
 import Footer from "./components/Footer.vue";
 console.clear();
 console.groupCollapsed("Hey 😎!");
-console.log(`
-If you are looking at this out of force of habits, send us an email to console@ccnconsulting.com.au and let's go get a coffee, it's on us.
+console.log(
+  `
+%cIf you are looking at this out of force of habits, send an email to %cconsole@ccnconsulting.com.au%c and let's go get a coffee, it's on us.
 PS. If you liked our website, check out the UI library we used https://go-ui.com
-`);
+`,
+  "color: #208388",
+  "color: #208388; font-weight: bold",
+  "color: #208388"
+);
 console.groupEnd();
 </script>
 
