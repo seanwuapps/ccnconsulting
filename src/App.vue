@@ -67,7 +67,7 @@ html {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    min-height: 100vh;
+    min-height: 50vh;
   }
 }
 .row {

@@ -42,7 +42,7 @@ export default defineComponent({
   @include tablet {
     flex-direction: row;
     align-items: center;
-    min-height: 50vh;
+    min-height: 30vh;
     margin: 10rem 0;
     gap: 5rem;
     flex: 1;
