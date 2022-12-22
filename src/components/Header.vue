@@ -2,11 +2,11 @@
   <header>
     <go-header-bar breakpoint="tablet">
       <go-gov-au-logo slot="logo">
-        <img slot="main-brand" :src="logoSrc" alt="CCN PTY LTD" />
-        <img slot="main-brand-on-dark" :src="logoSrc" alt="CCN PTY LTD" />
+        <img slot="main-brand" :src="logoSrc" alt="CCN Consulting Pty Ltd" />
+        <img slot="main-brand-on-dark" :src="logoSrc" alt="CCN Consulting Pty Ltd" />
         <div slot="co-brand">
           <div class="text-size-1">
-            <b>CCN PTY LTD</b>
+            <b>CCN Consulting Pty Ltd</b>
           </div>
           <div class="text-size-0 d-none d-block-desktop">
             {{ content.slogan }}

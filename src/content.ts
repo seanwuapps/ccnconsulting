@@ -47,7 +47,7 @@ We know how important it is to deliver quality work on time and we're committed 
     text: `
 **Email:** <a href="mailto:hello@ccnconsulting.com.au">hello@ccnconsulting.com.au</a>
 
-**Phone:** 0432 607 441 (Sean)
+**Phone:** 0432 607 441
 
 **Location:** Canberra, Australia
 `,
@@ -59,7 +59,7 @@ Are you passionate about what you do? We have been looking for you!
 <a href="mailto:career@ccnconsulting.com.au">Drop us an email</a> and let's see how we can empower you to do great things.`,
   },
   footer: {
-    copyright: `&copy; ${new Date().getFullYear()} CCN PTY LTD`,
+    copyright: `&copy; ${new Date().getFullYear()} CCN Consulting Pty Ltd`,
   },
-  abn: "16 658 755 072",
+  abn: "81 664 592 698",
 };
