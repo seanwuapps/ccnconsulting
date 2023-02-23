@@ -47,16 +47,18 @@ We know how important it is to deliver quality work on time and we're committed 
     text: `
 **Email:** <a href="mailto:hello@ccnconsulting.com.au">hello@ccnconsulting.com.au</a>
 
-**Phone:** 0432 607 441
-
 **Location:** Canberra, Australia
 `,
   },
   join: {
     text: `
-Are you passionate about what you do? We have been looking for you! 
+Are you passionate about what you do?
 
-<a href="mailto:career@ccnconsulting.com.au">Drop us an email</a> and let's see how we can empower you to do great things.`,
+*We have been looking for you!*
+
+See how we can empower you to do great things.
+
+<go-button flat round outline block="all" target="_blank" href="https://form.jotform.com/230490537104045">Connect with us</go-button>`,
   },
   footer: {
     copyright: `&copy; ${new Date().getFullYear()} CCN Consulting Pty Ltd`,
