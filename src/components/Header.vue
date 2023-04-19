@@ -1,9 +1,13 @@
 <template>
   <header>
-    <go-header-bar breakpoint="tablet">
-      <go-gov-au-logo slot="logo">
+    <GoHeaderBar breakpoint="tablet">
+      <GoGovAuLogo slot="logo">
         <img slot="main-brand" :src="logoSrc" alt="CCN Consulting Pty Ltd" />
-        <img slot="main-brand-on-dark" :src="logoSrc" alt="CCN Consulting Pty Ltd" />
+        <img
+          slot="main-brand-on-dark"
+          :src="logoSrc"
+          alt="CCN Consulting Pty Ltd"
+        />
         <div slot="co-brand">
           <div class="text-size-1">
             <b>CCN Consulting Pty Ltd</b>
@@ -12,10 +16,10 @@
             {{ content.slogan }}
           </div>
         </div>
-      </go-gov-au-logo>
+      </GoGovAuLogo>
 
       <div class="nav-actions" slot="actions">
-        <go-button
+        <GoButton
           :aria-label="`Switch to ${themeStore.currentTheme} mode`"
           variant="text"
           icon
@@ -24,20 +28,23 @@
           compact
           @click="() => themeStore.toggle()"
         >
-          <go-icon
-            size="1.5rem"
-            icon-set="bx"
-            :name="themeStore.icon"
-          ></go-icon>
-        </go-button>
+          <GoIcon size="1.5rem" icon-set="bx" :name="themeStore.icon"></GoIcon>
+        </GoButton>
       </div>
 
-      <go-main-nav slot="main-nav" :items.prop="navItems"></go-main-nav>
-    </go-header-bar>
+      <GoMainNav slot="main-nav" :items.prop="navItems"></GoMainNav>
+    </GoHeaderBar>
   </header>
 </template>
 
 <script lang="ts">
+import {
+  GoIcon,
+  GoMainNav,
+  GoHeaderBar,
+  GoButton,
+  GoGovAuLogo,
+} from "@go-ui/vue";
 import { INavItem } from "@go-ui/core/dist/types/interfaces";
 import { defineComponent } from "vue";
 import { useThemeStore } from "../stores/theme.store";
@@ -74,6 +81,13 @@ export default defineComponent({
     handleMobileTriggerClick() {
       (this.$refs.mobileMenu as any).open();
     },
+  },
+  components: {
+    GoIcon,
+    GoMainNav,
+    GoHeaderBar,
+    GoButton,
+    GoGovAuLogo,
   },
 });
 </script>

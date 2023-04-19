@@ -16,5 +16,6 @@
   </go-footer>
 </template>
 <script setup lang="ts">
+import { GoMd } from "@go-ui/vue";
 import content from "../content";
 </script>

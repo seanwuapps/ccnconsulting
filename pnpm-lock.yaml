@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@go-ui/core': ^1.1.0
+  '@go-ui/vue': ^1.4.0
   '@types/node': ^18.11.0
   '@vitejs/plugin-vue': ^3.1.0
   pinia: ^2.0.23
@@ -9,12 +10,15 @@ specifiers:
   typescript: ^4.6.4
   vite: ^3.1.0
   vue: ^3.2.37
+  vue-router: ^4.1.6
   vue-tsc: ^0.40.4
 
 dependencies:
   '@go-ui/core': 1.1.0
+  '@go-ui/vue': 1.4.0
   pinia: 2.0.23_l7r24p6nevbtlimqmqcwa3ouhu
   vue: 3.2.41
+  vue-router: 4.1.6_vue@3.2.41
 
 devDependencies:
   '@types/node': 18.11.0
@@ -49,6 +53,13 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
 
+  /@duetds/date-picker/1.4.0:
+    resolution: {integrity: sha512-jx4oSIrZAVsXYLyQGXbEmuo0gEXAqrNIGp3rG8L03XSxFFFca/bTpCj5v6yd48vVWOtAXD8y04S/+flOimra0A==}
+    engines: {node: '>= 12.17.0', npm: '>= 6.14.0'}
+    dependencies:
+      '@stencil/core': 2.22.3
+    dev: false
+
   /@esbuild/android-arm/0.15.11:
     resolution: {integrity: sha512-PzMcQLazLBkwDEkrNPi9AbjFt6+3I7HKbiYF2XtWQ7wItrHvEOeO3T8Am434zAozWtVP7lrTue1bEfc2nYWeCA==}
     engines: {node: '>=12'}
@@ -71,10 +82,20 @@ packages:
     resolution: {integrity: sha512-bO37brCPfteXQfFY0DyNDGB3+IMe4j150KFQcgJ5aBP295p9nBGeHEs/p0czrRbtlHq4Px/yoPXO/+dOCcF4uA==}
     dev: false
 
+  /@floating-ui/core/1.2.6:
+    resolution: {integrity: sha512-EvYTiXet5XqweYGClEmpu3BoxmsQ4hkj3QaYA6qEnigCWffTP3vNRwBReTdrwDwo7OoJ3wM8Uoe9Uk4n+d4hfg==}
+    dev: false
+
   /@floating-ui/dom/1.0.2:
     resolution: {integrity: sha512-5X9WSvZ8/fjy3gDu8yx9HAA4KG1lazUN2P4/VnaXLxTO9Dz53HI1oYoh1OlhqFNlHgGDiwFX5WhFCc2ljbW3yA==}
     dependencies:
       '@floating-ui/core': 1.0.1
+    dev: false
+
+  /@floating-ui/dom/1.2.6:
+    resolution: {integrity: sha512-02vxFDuvuVPs22iJICacezYJyf7zwwOCWkPNkWNBr1U0Qt1cKFYzWvxts0AmqcOQGwt/3KJWcWIgtbUU38keyw==}
+    dependencies:
+      '@floating-ui/core': 1.2.6
     dev: false
 
   /@go-ui/core/1.1.0:
@@ -91,6 +112,34 @@ packages:
       markdown-it-container: 3.0.0
       markdown-it-for-inline: 0.1.1
       open-props: 1.4.16
+    dev: false
+
+  /@go-ui/core/1.13.0:
+    resolution: {integrity: sha512-8dqn646qMTOA4ZFoQdxdERkJ8qCNKjdGUNe+yUL61gpXnNIERIbQ8L7euRl4ko1XSGPHbPPeJXy8WWJmunVUJQ==}
+    dependencies:
+      '@duetds/date-picker': 1.4.0
+      '@floating-ui/dom': 1.2.6
+      body-scroll-lock: 4.0.0-beta.0
+      dompurify: 2.4.5
+      json5: 2.2.3
+      lodash-es: 4.17.21
+      markdown-it: 13.0.1
+      markdown-it-container: 3.0.0
+      markdown-it-for-inline: 0.1.1
+      open-props: 1.5.7
+    dev: false
+
+  /@go-ui/vue/1.4.0:
+    resolution: {integrity: sha512-bACkctS3sFv7ZaY+lTGIaUr/B39JhP5u64Wnaf7tq+VwIKfzAyKiRQZ2A67+87/FwTaSFPXMaByO7TYJjPRSDw==}
+    dependencies:
+      '@duetds/date-picker': 1.4.0
+      '@go-ui/core': 1.13.0
+    dev: false
+
+  /@stencil/core/2.22.3:
+    resolution: {integrity: sha512-kmVA0M/HojwsfkeHsifvHVIYe4l5tin7J5+DLgtl8h6WWfiMClND5K3ifCXXI2ETDNKiEk21p6jql3Fx9o2rng==}
+    engines: {node: '>=12.10.0', npm: '>=6.0.0'}
+    hasBin: true
     dev: false
 
   /@types/node/18.11.0:
@@ -182,6 +231,10 @@ packages:
 
   /@vue/devtools-api/6.4.4:
     resolution: {integrity: sha512-Ku31WzpOV/8cruFaXaEZKF81WkNnvCSlBY4eOGtz5WMSdJvX1v1WWlSMGZeqUwPtQ27ZZz7B62erEMq8JDjcXw==}
+    dev: false
+
+  /@vue/devtools-api/6.5.0:
+    resolution: {integrity: sha512-o9KfBeaBmCKl10usN4crU53fYtC1r7jJwdGKjPT24t348rHxgfpZ0xL3Xm/gLUYnc0oTp8LAmrxOeLyu6tbk2Q==}
     dev: false
 
   /@vue/reactivity-transform/3.2.41:
@@ -281,6 +334,10 @@ packages:
 
   /dompurify/2.4.0:
     resolution: {integrity: sha512-Be9tbQMZds4a3C6xTmz68NlMfeONA//4dOavl/1rNw50E+/QO0KVpbcU0PcaW0nsQxurXls9ZocqFxk8R2mWEA==}
+    dev: false
+
+  /dompurify/2.4.5:
+    resolution: {integrity: sha512-jggCCd+8Iqp4Tsz0nIvpcb22InKEBrGz5dw3EQJMs8HPJDsKbFIO3STYtAvCfDx26Muevn1MHVI0XxjgFfmiSA==}
     dev: false
 
   /entities/3.0.1:
@@ -574,10 +631,20 @@ packages:
     hasBin: true
     dev: false
 
+  /json5/2.2.3:
+    resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
+    engines: {node: '>=6'}
+    hasBin: true
+    dev: false
+
   /linkify-it/4.0.1:
     resolution: {integrity: sha512-C7bfi1UZmoj8+PQx22XyeXCuBlokoyWQL5pWSP+EI6nzRylyThouddufc2c1NDIcP9k5agmN9fLpA7VNJfIiqw==}
     dependencies:
       uc.micro: 1.0.6
+    dev: false
+
+  /lodash-es/4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
     dev: false
 
   /lodash.debounce/4.0.8:
@@ -639,6 +706,10 @@ packages:
 
   /open-props/1.4.16:
     resolution: {integrity: sha512-kPIgGYjan1aKl3Vp1pG9V5TgH7CTaDWm3ndllTgr5gBQ3tu+F11dZKpZiP1+o/aCSCx8WMo15ARsFYxCAJXxHg==}
+    dev: false
+
+  /open-props/1.5.7:
+    resolution: {integrity: sha512-Xu7AlCaT2XPcDv8u0Ym5oFQZSurxNxnOawwyRb5I1PsF4n4nhpMpSwjqKo7TgznhMyBNi98vpI2PPZSVAZt+lA==}
     dev: false
 
   /path-parse/1.0.7:
@@ -797,6 +868,15 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
+      vue: 3.2.41
+    dev: false
+
+  /vue-router/4.1.6_vue@3.2.41:
+    resolution: {integrity: sha512-DYWYwsG6xNPmLq/FmZn8Ip+qrhFEzA14EI12MsMgVxvHFDYvlr4NXpVF5hrRH1wVcDP8fGi5F4rxuJSl8/r+EQ==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': 6.5.0
       vue: 3.2.41
     dev: false
 

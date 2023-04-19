@@ -11,23 +11,14 @@
     </div>
     <div class="feature-card__text">
       <h3>{{ feature.heading }}</h3>
-      <go-md :content="feature.text"></go-md>
+      <GoMd :content="feature.text"></GoMd>
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
 import content from "../content";
-
-export default defineComponent({
-  setup() {
-    const { services } = content;
-    return {
-      services,
-    };
-  },
-});
+import { GoMd } from "@go-ui/vue";
+const { services } = content;
 </script>
 
 <style lang="scss">

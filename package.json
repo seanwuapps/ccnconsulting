@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@go-ui/core": "^1.1.0",
+    "@go-ui/vue": "^1.4.0",
     "pinia": "^2.0.23",
-    "vue": "^3.2.37"
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@types/node": "^18.11.0",

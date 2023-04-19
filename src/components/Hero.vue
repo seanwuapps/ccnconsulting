@@ -1,19 +1,17 @@
 <template>
-  <go-hero
+  <GoHero
     :heading="content.hero.heading"
     img-src="/img/hero.svg"
     img-alt="Hero section illustration"
     class="hero"
   >
-    <go-md
-      md-options="{html: true}"
-      :content="content.hero.description"
-    ></go-md>
-  </go-hero>
+    <GoMd md-options="{html: true}" :content="content.hero.description"></GoMd>
+  </GoHero>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { GoHero, GoMd } from "@go-ui/vue";
 import content from "../content";
 
 export default defineComponent({
@@ -21,6 +19,10 @@ export default defineComponent({
     return {
       content,
     };
+  },
+  components: {
+    GoHero,
+    GoMd,
   },
 });
 </script>
