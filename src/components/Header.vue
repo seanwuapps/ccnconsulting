@@ -44,11 +44,11 @@ import {
   GoHeaderBar,
   GoButton,
   GoGovAuLogo,
-} from "@go-ui/vue";
-import { INavItem } from "@go-ui/core/dist/types/interfaces";
-import { defineComponent } from "vue";
-import { useThemeStore } from "../stores/theme.store";
-import content from "../content";
+} from '@go-ui/vue';
+import { INavItem } from '@go-ui/core/dist/types/interfaces';
+import { defineComponent } from 'vue';
+import { useThemeStore } from '../stores/theme.store';
+import content from '../content';
 
 export default defineComponent({
   setup() {
@@ -57,19 +57,26 @@ export default defineComponent({
     return { themeStore, content };
   },
   data() {
-    let logoSrc = "/img/logo.svg";
+    let logoSrc = '/img/logo.svg';
     let navItems: INavItem[] = [
       {
-        label: "About",
-        url: "#about",
+        label: 'About',
+        url: '#about',
       },
       {
-        label: "Services",
-        url: "#services",
+        label: 'Services',
+        url: '#services',
       },
       {
-        label: "Contact us",
-        url: "#contact-us",
+        label: 'Contact',
+        url: '#contact-us',
+      },
+      {
+        label: 'Work with us',
+        url: 'https://form.jotform.com/230490537104045',
+        linkAttrs: {
+          target: '_blank',
+        },
       },
     ];
     return {
