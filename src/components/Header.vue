@@ -1,7 +1,7 @@
 <template>
   <header>
     <GoHeaderBar breakpoint="tablet">
-      <GoGovAuLogo slot="logo">
+      <GoGovAuLogo slot="logo" href="/">
         <img slot="main-brand" :src="logoSrc" alt="CCN Consulting Pty Ltd" />
         <img
           slot="main-brand-on-dark"
@@ -32,7 +32,7 @@
         </GoButton>
       </div>
 
-      <GoMainNav slot="main-nav" :items.prop="navItems"></GoMainNav>
+      <GoMainNav slot="main-nav" :items="navItems"></GoMainNav>
     </GoHeaderBar>
   </header>
 </template>
@@ -61,15 +61,19 @@ export default defineComponent({
     let navItems: INavItem[] = [
       {
         label: 'About',
-        url: '#about',
+        url: '/#about',
       },
       {
         label: 'Services',
-        url: '#services',
+        url: '/#services',
+      },
+      {
+        label: 'Jobs',
+        url: '/jobs',
       },
       {
         label: 'Contact',
-        url: '#contact-us',
+        url: '/#contact-us',
       },
       {
         label: 'Work with us',

@@ -1,11 +1,12 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@go-ui/core': ^1.1.0
+  '@go-ui/core': ^1.14.0
   '@go-ui/vue': ^1.4.0
   '@types/node': ^18.11.0
   '@vitejs/plugin-vue': ^3.1.0
   airtable: ^0.12.1
+  dayjs: ^1.11.8
   pinia: ^2.0.23
   sass: ^1.55.0
   typescript: ^4.6.4
@@ -15,9 +16,10 @@ specifiers:
   vue-tsc: ^0.40.4
 
 dependencies:
-  '@go-ui/core': 1.1.0
+  '@go-ui/core': 1.14.0
   '@go-ui/vue': 1.4.0
   airtable: 0.12.1
+  dayjs: 1.11.8
   pinia: 2.0.23_l7r24p6nevbtlimqmqcwa3ouhu
   vue: 3.2.41
   vue-router: 4.1.6_vue@3.2.41
@@ -80,40 +82,14 @@ packages:
     dev: true
     optional: true
 
-  /@floating-ui/core/1.0.1:
-    resolution: {integrity: sha512-bO37brCPfteXQfFY0DyNDGB3+IMe4j150KFQcgJ5aBP295p9nBGeHEs/p0czrRbtlHq4Px/yoPXO/+dOCcF4uA==}
-    dev: false
-
   /@floating-ui/core/1.2.6:
     resolution: {integrity: sha512-EvYTiXet5XqweYGClEmpu3BoxmsQ4hkj3QaYA6qEnigCWffTP3vNRwBReTdrwDwo7OoJ3wM8Uoe9Uk4n+d4hfg==}
-    dev: false
-
-  /@floating-ui/dom/1.0.2:
-    resolution: {integrity: sha512-5X9WSvZ8/fjy3gDu8yx9HAA4KG1lazUN2P4/VnaXLxTO9Dz53HI1oYoh1OlhqFNlHgGDiwFX5WhFCc2ljbW3yA==}
-    dependencies:
-      '@floating-ui/core': 1.0.1
     dev: false
 
   /@floating-ui/dom/1.2.6:
     resolution: {integrity: sha512-02vxFDuvuVPs22iJICacezYJyf7zwwOCWkPNkWNBr1U0Qt1cKFYzWvxts0AmqcOQGwt/3KJWcWIgtbUU38keyw==}
     dependencies:
       '@floating-ui/core': 1.2.6
-    dev: false
-
-  /@go-ui/core/1.1.0:
-    resolution: {integrity: sha512-vD2ePt1AT/I1KbaET08YuODbb5st7hcqeCLqtsX4nfGKxM4Upu+eTpUSLVgxqm/xDKKF6/eie1BewxCLoPSjDQ==}
-    dependencies:
-      '@floating-ui/dom': 1.0.2
-      body-scroll-lock: 4.0.0-beta.0
-      dompurify: 2.4.0
-      json5: 2.2.1
-      lodash.debounce: 4.0.8
-      lodash.kebabcase: 4.1.1
-      lodash.uniqueid: 4.0.1
-      markdown-it: 13.0.1
-      markdown-it-container: 3.0.0
-      markdown-it-for-inline: 0.1.1
-      open-props: 1.4.16
     dev: false
 
   /@go-ui/core/1.14.0:
@@ -362,8 +338,8 @@ packages:
   /csstype/2.6.21:
     resolution: {integrity: sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==}
 
-  /dompurify/2.4.0:
-    resolution: {integrity: sha512-Be9tbQMZds4a3C6xTmz68NlMfeONA//4dOavl/1rNw50E+/QO0KVpbcU0PcaW0nsQxurXls9ZocqFxk8R2mWEA==}
+  /dayjs/1.11.8:
+    resolution: {integrity: sha512-LcgxzFoWMEPO7ggRv1Y2N31hUf2R0Vj7fuy/m+Bg1K8rr+KAs1AEy4y9jd5DXe8pbHgX+srkHNS7TH6Q6ZhYeQ==}
     dev: false
 
   /dompurify/2.4.5:
@@ -660,12 +636,6 @@ packages:
     engines: {node: '>=0.12.0'}
     dev: true
 
-  /json5/2.2.1:
-    resolution: {integrity: sha512-1hqLFMSrGHRHxav9q9gNjJ5EXznIxGVO09xQRrwplcS8qs28pZ8s8hupZAmqDwZUmVZ2Qb2jnyPOWcDH8m8dlA==}
-    engines: {node: '>=6'}
-    hasBin: true
-    dev: false
-
   /json5/2.2.3:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
@@ -680,18 +650,6 @@ packages:
 
   /lodash-es/4.17.21:
     resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
-    dev: false
-
-  /lodash.debounce/4.0.8:
-    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
-    dev: false
-
-  /lodash.kebabcase/4.1.1:
-    resolution: {integrity: sha512-N8XRTIMMqqDgSy4VLKPnJ/+hpGZN+PHQiJnSenYqPaVV/NCqEogTnAdZLQiGKhxX+JCs8waWq2t1XHWKOmlY8g==}
-    dev: false
-
-  /lodash.uniqueid/4.0.1:
-    resolution: {integrity: sha512-GQQWaIeGlL6DIIr06kj1j6sSmBxyNMwI8kaX9aKpHR/XsMTiaXDVPNPAkiboOTK9OJpTJF/dXT3xYoFQnj386Q==}
     dev: false
 
   /lodash/4.17.21:
@@ -754,10 +712,6 @@ packages:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
     dev: true
-
-  /open-props/1.4.16:
-    resolution: {integrity: sha512-kPIgGYjan1aKl3Vp1pG9V5TgH7CTaDWm3ndllTgr5gBQ3tu+F11dZKpZiP1+o/aCSCx8WMo15ARsFYxCAJXxHg==}
-    dev: false
 
   /open-props/1.5.7:
     resolution: {integrity: sha512-Xu7AlCaT2XPcDv8u0Ym5oFQZSurxNxnOawwyRb5I1PsF4n4nhpMpSwjqKo7TgznhMyBNi98vpI2PPZSVAZt+lA==}

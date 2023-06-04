@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Hero from './components/Hero.vue';
-import Features from './components/Features.vue';
-import BgLine from './components/BgLine.vue';
-import content from './content';
-import ContactUs from './components/ContactUs.vue';
-import FeaturedJobs from './components/jobs/FeaturedJobs.vue';
+import Hero from '@/components/Hero.vue';
+import Features from '@/components/Features.vue';
+import BgLine from '@/components/BgLine.vue';
+import content from '../content';
+import ContactUs from '@/components/ContactUs.vue';
+import LatestJobs from '@/components/jobs/LatestJobs.vue';
 
 console.clear();
 console.groupCollapsed('Hey 😎!');
@@ -33,8 +33,8 @@ console.groupEnd();
       <Features />
     </div>
 
-    <div class="container section" id="featured-jobs">
-      <FeaturedJobs />
+    <div class="container section" id="latest-jobs">
+      <LatestJobs />
     </div>
 
     <div class="container section" id="contact-us">
@@ -54,24 +54,16 @@ html {
   --go-heading-font-family: 'Cormorant Garamond', serif;
 }
 .section > h2 {
-  text-transform: uppercase;
   margin-bottom: 1em;
-  @include tablet {
-    text-align: inherit;
-  }
 }
 .section {
+  width: 100%;
   padding: 10rem var(--go-outer-gutter, 0.5rem);
   @include tablet {
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 50vh;
+    padding: 8rem 0;
   }
 }
-.row {
-  width: 100%;
+p {
+  font-size: var(--go-size-1);
 }
 </style>

@@ -1,10 +1,13 @@
-import { createRouter, createWebHistory } from "vue-router";
-import Home from "./Home.vue";
-import RateCalculator from "./RateCalculator.vue";
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '@/pages/Home.vue';
 
 const routes = [
-  { path: "/", component: Home },
-  { path: "/rate-calculator", component: RateCalculator },
+  { path: '/', component: Home },
+  { path: '/jobs', component: () => import('@/pages/Jobs.vue') },
+  {
+    path: '/rate-calculator',
+    component: () => import('@/pages/RateCalculator.vue'),
+  },
 ];
 
 const router = createRouter({

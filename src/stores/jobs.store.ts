@@ -1,15 +1,19 @@
 import { defineStore } from 'pinia';
 import Airtable from 'airtable';
 import { AIRTABLE_KEY } from '../const';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
 
 export const useJobsStore = defineStore('jobs', {
   state: () => {
     return {
-      currentJobs: [],
+      latest: [] as any[],
     };
   },
   actions: {
-    async fetchJobs() {
+    async fetchLatest() {
       const base = new Airtable({ apiKey: AIRTABLE_KEY }).base(
         'appjb01Lr9hMbTruv'
       );
@@ -19,27 +23,38 @@ export const useJobsStore = defineStore('jobs', {
           // Selecting the first 3 records in Grid view:
           maxRecords: 3,
           view: 'Grid view',
+          sort: [
+            {
+              field: 'Published date',
+              direction: 'desc',
+            },
+          ],
         })
-        .eachPage(
-          function page(records, fetchNextPage) {
-            // This function (`page`) will get called for each page of records.
-
-            records.forEach(function (record) {
-              console.log('Retrieved', record.get('RFQ ID'));
-            });
-
-            // To fetch the next page of records, call `fetchNextPage`.
-            // If there are more records, `page` will get called again.
-            // If there are no more records, `done` will get called.
-            fetchNextPage();
-          },
-          function done(err) {
-            if (err) {
-              console.error(err);
-              return;
-            }
+        .firstPage((err, records) => {
+          if (!records) {
+            return;
           }
-        );
+          this.latest = records.map((record) => {
+            const title = record.get('Title');
+            const buyer = record.get('Buyer');
+            const location = record.get('Location');
+            const closingDateString = record.get('Closing date') as string;
+            const closingDate = dayjs(closingDateString);
+            const blurb =
+              (record.get('Description') as string).substring(0, 100) + '...';
+            const slug = record.get('Slug');
+            const isClosed = closingDate.isAfter(dayjs());
+            return {
+              title,
+              buyer,
+              location,
+              closingDateRelative: closingDate.toNow(),
+              isClosed,
+              blurb,
+              slug,
+            };
+          });
+        });
     },
   },
 });

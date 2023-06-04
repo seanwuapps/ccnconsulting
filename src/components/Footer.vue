@@ -6,7 +6,7 @@
           <go-md :content="content.footer.copyright"></go-md>
         </div>
         <div class="col-tablet-8 col-desktop-4">
-          <p class="text-end">
+          <p class="abn">
             <strong class="mr-2">ABN</strong>
             <span>{{ content.abn }}</span>
           </p>
@@ -16,6 +16,15 @@
   </go-footer>
 </template>
 <script setup lang="ts">
-import { GoMd } from "@go-ui/vue";
-import content from "../content";
+import { GoMd } from '@go-ui/vue';
+import content from '../content';
 </script>
+<style lang="scss">
+@import '@go-ui/core/src/global/scss/utils';
+.abn {
+  text-align: start;
+  @include tablet {
+    text-align: end;
+  }
+}
+</style>
