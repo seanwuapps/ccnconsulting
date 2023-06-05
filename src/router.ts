@@ -4,6 +4,7 @@ import Home from '@/pages/Home.vue';
 const routes = [
   { path: '/', component: Home },
   { path: '/jobs', component: () => import('@/pages/Jobs.vue') },
+  { path: '/jobs/:slug', component: () => import('@/pages/JobDetails.vue') },
   {
     path: '/rate-calculator',
     component: () => import('@/pages/RateCalculator.vue'),
