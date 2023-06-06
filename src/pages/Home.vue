@@ -21,24 +21,26 @@ console.groupEnd();
 </script>
 
 <template>
-  <Hero />
-  <div class="content">
-    <BgLine />
-    <div class="container section" id="about">
-      <h2>About</h2>
-      <go-md :content="content.about"></go-md>
-    </div>
+  <div class="home">
+    <Hero />
+    <div>
+      <BgLine />
+      <div class="container section" id="about">
+        <h2>About</h2>
+        <go-md :content="content.about"></go-md>
+      </div>
 
-    <div class="container section" id="services">
-      <Features />
-    </div>
+      <div class="container section" id="services">
+        <Features />
+      </div>
 
-    <div class="container section" id="latest-jobs">
-      <LatestJobs />
-    </div>
+      <div class="container section" id="latest-jobs">
+        <LatestJobs />
+      </div>
 
-    <div class="container section" id="contact-us">
-      <ContactUs />
+      <div class="container section" id="contact-us">
+        <ContactUs />
+      </div>
     </div>
   </div>
 </template>
@@ -63,7 +65,12 @@ html {
     padding: 8rem 0;
   }
 }
-p {
-  font-size: var(--go-size-1);
+.home {
+  go-hero {
+    --hero-text-box-padding: 2rem;
+  }
+  p {
+    font-size: var(--go-size-1);
+  }
 }
 </style>

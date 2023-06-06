@@ -8,86 +8,118 @@ import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 dayjs.extend(relativeTime);
 dayjs.extend(isSameOrBefore);
 
-const jobsBase = new Airtable({ apiKey: AIRTABLE_KEY }).base(
-  'appjb01Lr9hMbTruv'
-)('Jobs');
+const jobsBase = new Airtable({ apiKey: AIRTABLE_KEY }).base('appjb01Lr9hMbTruv')('Jobs');
+
+const DATE_DISPLAY_FORMAT = 'DD MMM YYYY';
+const DATETIME_DISPLAY_FORMAT = 'DD MMM YYYY';
 
 const formatJobCard = (record) => {
   const title = record.get('Title');
   const buyer = record.get('Buyer');
   const location = record.get('Location');
   const closingDateString = record.get('Closing date');
-  const closingDate = dayjs(closingDateString);
+  const closingDateObj = dayjs(closingDateString);
   const description = record.get('Description');
-  const blurb = description.substring(0, 100) + '...';
+  const blurb = description?.substring(0, 100) + '...';
   const slug = record.get('Slug');
-  const isClosed = dayjs().isAfter(closingDate);
-  const publishedDate = dayjs(record.get('Published date')).format(
-    'DD MMM YYYY'
-  );
+  const isClosed = dayjs().isAfter(closingDateObj);
+  const publishedDateObj = dayjs(record.get('Published date'));
   return {
     title,
     buyer,
     location,
-    closingDateRelative: closingDate.fromNow(),
+    closingDateObj,
+    closingDate: closingDateObj.format(DATETIME_DISPLAY_FORMAT),
+    closingDateRelative: closingDateObj.fromNow(),
     isClosed,
     blurb,
     description,
     slug,
-    publishedDate,
+    publishedDateObj,
+    publishedDate: publishedDateObj.format(DATE_DISPLAY_FORMAT),
   };
 };
 
 const formatJobDetails = (record) => {
   return {
     ...formatJobCard(record),
+    essentialCriteria: record.get('Essential criteria'),
+    desirableCriteria: record.get('Desirable criteria'),
   };
 };
+
+export async function fetchJobs(options) {
+  return new Promise((resolve, reject) => {
+    jobsBase
+      .select({
+        view: 'Grid view',
+        sort: [
+          {
+            field: 'Published date',
+            direction: 'desc',
+          },
+        ],
+        ...options,
+      })
+      .firstPage((error, records) => {
+        if (error) {
+          reject(error);
+        }
+        resolve(records);
+      });
+  });
+}
 
 export const useJobsStore = defineStore('jobs', {
   state: () => {
     return {
       latest: [],
       currentJob: null,
-      fetchingDetails: false
+      fetchingDetails: false,
+      list: [],
+      fetchingList: false,
+      listFilters: {
+        showClosed: false,
+      },
     };
   },
+  getters: {
+    filteredList(state) {
+      let result = state.list;
+      if (!state.listFilters.showClosed) {
+        result = result.filter((job) => !job.isClosed);
+      }
+      return result;
+    },
+  },
   actions: {
-    async fetchLatest() {
-      jobsBase
-        .select({
-          // Selecting the first 3 records in Grid view:
-          maxRecords: 3,
-          view: 'Grid view',
-          sort: [
-            {
-              field: 'Published date',
-              direction: 'desc',
-            },
-          ],
-        })
-        .firstPage((_, records) => {
-          if (!records) {
-            return;
-          }
-          this.latest = records.map(formatJobCard);
-        });
+    async fetchListing() {
+      this.fetchingList = true;
+      try {
+        const records = await fetchJobs();
+        this.list = records.map(formatJobCard);
+      } finally {
+        this.fetchingList = false;
+      }
+    },
+    async fetchLatest(n = 3) {
+      const records = await fetchJobs({
+        // Selecting the first 3 records in Grid view:
+        maxRecords: n,
+      });
+      this.latest = records.map(formatJobCard);
     },
     async fetchJob(slug) {
       this.fetchingDetails = true;
-      jobsBase
-        .select({
+      try {
+        const records = await fetchJobs({
           maxRecords: 1,
-          view: 'Grid view',
           filterByFormula: `{Slug} = '${slug}'`,
-        })
-        .firstPage((_, records) => {
-          if (!records) {
-            return;
-          }
-          this.currentJob = formatJobDetails(records[0]);
-          this.fetchingDetails = false;
         });
+        this.currentJob = formatJobDetails(records[0]);
+      } finally {
+        this.fetchingDetails = false;
+      }
     },
   },
 });

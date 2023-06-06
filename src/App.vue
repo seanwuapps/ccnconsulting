@@ -20,4 +20,7 @@ import Footer from './components/Footer.vue';
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
 }
+go-hero {
+  --hero-text-box-padding: 2rem 0;
+}
 </style>

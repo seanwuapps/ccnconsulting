@@ -3,13 +3,11 @@ export default {
   hero: {
     img: '/img/hero.svg',
     imgAlt: 'Hero section illustration',
-    heading: '',
+    heading: 'Impactful collaboration',
     description: `
-# Creating impact together
+Outcome driven consulting services for digital projects
 
-<div class="pt-4 pb-4 text-size-1">Outcome driven consulting services for digital projects</div>
-
-<go-button variant="secondary" flat round href="#contact-us">Start a conversation</go-button>
+<go-button variant="primary" flat round href="#contact-us">Start a conversation</go-button>
 `,
   },
   about: `
@@ -26,7 +24,7 @@ We know how important it is to deliver quality work on time and we're committed 
     },
     {
       img: '/img/ui.svg',
-      imgAlt: 'team building ui',
+      imgAlt: 'team building illustration',
       heading: 'Digital delivery',
       text: "Our multidisciplinary team of specialists bring a wealth of knowledge and expertise to help our clients creating more effective teams. Our outcome driven approach builds a collaborative environment for the delivery team to ensure the client's vision can be realised.",
     },

@@ -1,13 +1,10 @@
 <template>
   <header>
+    <GoSkipLink to="main">Skip to main</GoSkipLink>
     <GoHeaderBar breakpoint="tablet">
       <GoGovAuLogo slot="logo" href="/">
         <img slot="main-brand" :src="logoSrc" alt="CCN Consulting Pty Ltd" />
-        <img
-          slot="main-brand-on-dark"
-          :src="logoSrc"
-          alt="CCN Consulting Pty Ltd"
-        />
+        <img slot="main-brand-on-dark" :src="logoSrc" alt="CCN Consulting Pty Ltd" />
         <div slot="co-brand">
           <div class="text-size-1">
             <b>CCN Consulting Pty Ltd</b>
@@ -26,8 +23,7 @@
           round
           flat
           compact
-          @click="() => themeStore.toggle()"
-        >
+          @click="() => themeStore.toggle()">
           <GoIcon size="1.5rem" icon-set="bx" :name="themeStore.icon"></GoIcon>
         </GoButton>
       </div>
@@ -38,13 +34,7 @@
 </template>
 
 <script lang="ts">
-import {
-  GoIcon,
-  GoMainNav,
-  GoHeaderBar,
-  GoButton,
-  GoGovAuLogo,
-} from '@go-ui/vue';
+import { GoIcon, GoMainNav, GoHeaderBar, GoButton, GoGovAuLogo, GoSkipLink } from '@go-ui/vue';
 import { INavItem } from '@go-ui/core/dist/types/interfaces';
 import { defineComponent } from 'vue';
 import { useThemeStore } from '../stores/theme.store';
@@ -60,12 +50,8 @@ export default defineComponent({
     let logoSrc = '/img/logo.svg';
     let navItems: INavItem[] = [
       {
-        label: 'About',
-        url: '/#about',
-      },
-      {
-        label: 'Services',
-        url: '/#services',
+        label: 'Home',
+        url: '/',
       },
       {
         label: 'Jobs',
@@ -99,6 +85,7 @@ export default defineComponent({
     GoHeaderBar,
     GoButton,
     GoGovAuLogo,
+    GoSkipLink,
   },
 });
 </script>

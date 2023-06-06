@@ -1,41 +1,37 @@
 <template>
-  <GoCard
-    :card-title="job.title"
-    :card-subtitle="job.buyer"
-    heading-tag="h3"
-    :class="{ 'job-card': true, closed: job.isClosed }">
-    <div>Published on {{ job.publishedDate }}</div>
-    <div v-if="!job.isClosed">
-      <div>Closing {{ job.closingDateRelative }}</div>
-    </div>
-    <div slot="footer">
-      <router-link
-        v-if="!job.isClosed"
-        custom
-        v-slot="{ href, navigate }"
-        :to="`/jobs/${job.slug}`">
-        <GoButton
-          variant="secondary"
-          block="all"
-          @click="navigate"
-          :href="href">
-          View job details
-        </GoButton>
-      </router-link>
-      <div v-else>Closed</div>
-    </div>
-  </GoCard>
+  <router-link custom v-slot="{ href, navigate }" :to="`/jobs/${job.slug}`">
+    <GoCard
+      v-bind="$attrs"
+      :card-title="job.title"
+      :card-subtitle="job.buyer"
+      heading-tag="h3"
+      :href="href"
+      @click="navigate"
+      flat
+      border
+      :class="{ 'job-card': true, closed: job.isClosed }">
+      <div class="job-card-chip" slot="pre-title">
+        <GoChip v-if="!job.isClosed" variant="success">
+          <div>Closing {{ job.closingDateRelative }}</div>
+        </GoChip>
+        <GoChip v-else variant="neutral">Closed</GoChip>
+      </div>
+      <div slot="footer">Published on {{ job.publishedDate }}</div>
+    </GoCard>
+  </router-link>
 </template>
 
 <script lang="ts">
-import { GoButton, GoCard, GoIcon, GoLink } from '@go-ui/vue';
+import { GoButton, GoCard, GoIcon, GoChip, GoLink } from '@go-ui/vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+  inheritAttrs: false,
   components: {
     GoCard,
     GoButton,
     GoIcon,
+    GoChip,
     GoLink,
   },
   props: {
@@ -49,7 +45,10 @@ export default defineComponent({
 <style lang="scss">
 .job-card {
   &.closed {
-    opacity: 0.4;
+    opacity: 0.6;
   }
+  // .job-card-chip {
+  //   float: right;
+  // }
 }
 </style>

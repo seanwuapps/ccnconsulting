@@ -3,5 +3,5 @@
   "useTabs": false,
   "singleQuote": true,
   "bracketSameLine": true,
-  "htmlWhitespaceSensitivity": "css"
+  "printWidth": 120
 }
