@@ -50,11 +50,6 @@ console.groupEnd();
 html {
   overflow-x: hidden;
 }
-:root {
-  --ccn-primary-color: #208388;
-  --ccn-primary-color-50: #{rgba(#208388, 0.5)};
-  --go-heading-font-family: 'Cormorant Garamond', serif;
-}
 .section > h2 {
   margin-bottom: 1em;
 }

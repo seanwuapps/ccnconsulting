@@ -7,7 +7,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   mounted() {
@@ -18,14 +18,13 @@ export default defineComponent({
     const path = this.$refs.line as SVGGeometryElement;
     const pathLength = path.getTotalLength();
     // Make very long dashes (the length of the path itself)
-    path.style.strokeDasharray = pathLength + " " + pathLength;
+    path.style.strokeDasharray = pathLength + ' ' + pathLength;
     // Offset the dashes so the it appears hidden entirely
     path.style.strokeDashoffset = pathLength.toString();
-    window.addEventListener("scroll", () => {
+    window.addEventListener('scroll', () => {
       var scrollPercentage =
         document.documentElement.scrollTop /
-        (document.documentElement.scrollHeight -
-          document.documentElement.clientHeight);
+        (document.documentElement.scrollHeight - document.documentElement.clientHeight);
 
       // Length to offset the dashes
       var drawLength = pathLength * scrollPercentage;
@@ -36,19 +35,19 @@ export default defineComponent({
       // When complete, remove the dash array, otherwise shape isn't quite sharp
       // Accounts for fuzzy math
       if (scrollPercentage >= 0.99) {
-        path.style.strokeDasharray = "none";
+        path.style.strokeDasharray = 'none';
       } else {
-        path.style.strokeDasharray = pathLength + " " + pathLength;
+        path.style.strokeDasharray = pathLength + ' ' + pathLength;
       }
     });
 
-    const contentEl = document.querySelector(".content") as HTMLElement;
+    const contentEl = document.querySelector('.content') as HTMLElement;
     if (contentEl) {
       setTimeout(() => {
         this.setSvgHeight(contentEl, svg);
       }, 1000);
 
-      window.addEventListener("resize", () => {
+      window.addEventListener('resize', () => {
         this.setSvgHeight(contentEl, svg);
       });
     }
@@ -56,7 +55,7 @@ export default defineComponent({
   methods: {
     setSvgHeight(contentEl: HTMLElement, svg: HTMLElement) {
       const contentH = contentEl.getBoundingClientRect().height;
-      svg.style.height = contentH + "px";
+      svg.style.height = contentH + 'px';
     },
   },
 });
@@ -77,7 +76,7 @@ export default defineComponent({
     min-width: 400px;
     transform: translate(10%, -1rem);
     path {
-      stroke: var(--ccn-primary-color-50);
+      stroke: rgba(#208388, 0.5);
       stroke-width: 0.25rem;
     }
   }
