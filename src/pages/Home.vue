@@ -61,9 +61,6 @@ html {
   }
 }
 .home {
-  go-hero {
-    --hero-text-box-padding: 2rem;
-  }
   p {
     font-size: var(--go-size-1);
   }

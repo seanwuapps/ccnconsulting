@@ -122,5 +122,22 @@ export default defineComponent({
       display: none;
     }
   }
+  .home {
+    go-hero {
+      --hero-full-width-bg-padding: 0;
+      .full-width-bg {
+        transform: none;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        * {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
 }
 </style>
