@@ -23,7 +23,7 @@ console.groupEnd();
 <template>
   <div class="home">
     <Hero />
-    <div>
+    <div id="main-content">
       <BgLine />
       <div class="container section" id="about">
         <h2>About</h2>
@@ -64,5 +64,8 @@ html {
   p {
     font-size: var(--go-size-1);
   }
+}
+#main-content {
+  position: relative;
 }
 </style>

@@ -41,7 +41,7 @@ export default defineComponent({
       }
     });
 
-    const contentEl = document.querySelector('.content') as HTMLElement;
+    const contentEl = document.querySelector('#main-content') as HTMLElement;
     if (contentEl) {
       setTimeout(() => {
         this.setSvgHeight(contentEl, svg);
@@ -60,10 +60,11 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .bg-line-container {
   position: absolute;
   width: 100%;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   display: grid;
