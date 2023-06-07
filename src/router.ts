@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '@/pages/Home.vue';
 
 const routes = [
-  { path: '/', component: Home },
+  { path: '/', component: () => import('@/pages/Home.vue') },
   { path: '/jobs', component: () => import('@/pages/Jobs.vue') },
   { path: '/jobs/:slug', component: () => import('@/pages/JobDetails.vue') },
   {
