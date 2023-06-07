@@ -1,6 +1,7 @@
 <template>
   <header>
     <GoSkipLink to="main">Skip to main</GoSkipLink>
+    <GoNavDrawer ref="mobileMenu" label="Menu" :items="navItems" />
     <GoHeaderBar breakpoint="tablet">
       <GoGovAuLogo slot="logo" href="/">
         <img slot="main-brand" :src="logoSrc" alt="CCN Consulting Pty Ltd" />
@@ -26,13 +27,24 @@
         </GoButton>
       </div>
 
+      <GoButton
+        slot="mobile-menu-trigger"
+        aria-label="menu"
+        compact
+        icon
+        flat
+        variant="text"
+        @click="handleMobileTriggerClick">
+        <GoIcon icon-set="bx" name="menu" size="1.5rem" slot="prefix"></GoIcon>
+      </GoButton>
+
       <GoMainNav slot="main-nav" :items="navItems"></GoMainNav>
     </GoHeaderBar>
   </header>
 </template>
 
 <script lang="ts">
-import { GoIcon, GoMainNav, GoHeaderBar, GoButton, GoGovAuLogo, GoSkipLink } from '@go-ui/vue';
+import { GoIcon, GoMainNav, GoHeaderBar, GoButton, GoGovAuLogo, GoSkipLink, GoNavDrawer } from '@go-ui/vue';
 import { INavItem } from '@go-ui/core/dist/types/interfaces';
 import { defineComponent } from 'vue';
 import { useThemeStore } from '../stores/theme.store';
@@ -74,7 +86,7 @@ export default defineComponent({
   },
   methods: {
     handleMobileTriggerClick() {
-      (this.$refs.mobileMenu as any).open();
+      (this.$refs.mobileMenu as any).$el.open();
     },
   },
   components: {
@@ -84,6 +96,7 @@ export default defineComponent({
     GoButton,
     GoGovAuLogo,
     GoSkipLink,
+    GoNavDrawer,
   },
 });
 </script>
