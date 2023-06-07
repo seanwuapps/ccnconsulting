@@ -1,13 +1,10 @@
 <template>
   <header>
+    <GoSkipLink to="main">Skip to main</GoSkipLink>
     <GoHeaderBar breakpoint="tablet">
-      <GoGovAuLogo slot="logo">
+      <GoGovAuLogo slot="logo" href="/">
         <img slot="main-brand" :src="logoSrc" alt="CCN Consulting Pty Ltd" />
-        <img
-          slot="main-brand-on-dark"
-          :src="logoSrc"
-          alt="CCN Consulting Pty Ltd"
-        />
+        <img slot="main-brand-on-dark" :src="logoSrc" alt="CCN Consulting Pty Ltd" />
         <div slot="co-brand">
           <div class="text-size-1">
             <b>CCN Consulting Pty Ltd</b>
@@ -26,29 +23,22 @@
           round
           flat
           compact
-          @click="() => themeStore.toggle()"
-        >
+          @click="() => themeStore.toggle()">
           <GoIcon size="1.5rem" icon-set="bx" :name="themeStore.icon"></GoIcon>
         </GoButton>
       </div>
 
-      <GoMainNav slot="main-nav" :items.prop="navItems"></GoMainNav>
+      <GoMainNav slot="main-nav" :items="navItems"></GoMainNav>
     </GoHeaderBar>
   </header>
 </template>
 
 <script lang="ts">
-import {
-  GoIcon,
-  GoMainNav,
-  GoHeaderBar,
-  GoButton,
-  GoGovAuLogo,
-} from "@go-ui/vue";
-import { INavItem } from "@go-ui/core/dist/types/interfaces";
-import { defineComponent } from "vue";
-import { useThemeStore } from "../stores/theme.store";
-import content from "../content";
+import { GoIcon, GoMainNav, GoHeaderBar, GoButton, GoGovAuLogo, GoSkipLink } from '@go-ui/vue';
+import { INavItem } from '@go-ui/core/dist/types/interfaces';
+import { defineComponent } from 'vue';
+import { useThemeStore } from '../stores/theme.store';
+import content from '../content';
 
 export default defineComponent({
   setup() {
@@ -57,19 +47,26 @@ export default defineComponent({
     return { themeStore, content };
   },
   data() {
-    let logoSrc = "/img/logo.svg";
+    let logoSrc = '/img/logo.svg';
     let navItems: INavItem[] = [
       {
-        label: "About",
-        url: "#about",
+        label: 'Home',
+        url: '/',
       },
       {
-        label: "Services",
-        url: "#services",
+        label: 'Jobs',
+        url: '/jobs',
       },
       {
-        label: "Contact us",
-        url: "#contact-us",
+        label: 'Contact',
+        url: '/#contact-us',
+      },
+      {
+        label: 'Work with us',
+        url: 'https://form.jotform.com/230490537104045',
+        linkAttrs: {
+          target: '_blank',
+        },
       },
     ];
     return {
@@ -88,6 +85,7 @@ export default defineComponent({
     GoHeaderBar,
     GoButton,
     GoGovAuLogo,
+    GoSkipLink,
   },
 });
 </script>

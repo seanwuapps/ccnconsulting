@@ -5,22 +5,25 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@go-ui/core": "^1.1.0",
+    "@formkit/auto-animate": "1.0.0-beta.6",
+    "@go-ui/core": "^1.14.0",
     "@go-ui/vue": "^1.4.0",
+    "airtable": "^0.12.1",
+    "dayjs": "^1.11.8",
     "pinia": "^2.0.23",
     "vue": "^3.2.37",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
-    "@types/node": "^18.11.0",
+    "@types/node": "^20.2.5",
     "@vitejs/plugin-vue": "^3.1.0",
     "sass": "^1.55.0",
     "typescript": "^4.6.4",
-    "vite": "^3.1.0",
+    "vite": "^4.3.9",
     "vue-tsc": "^0.40.4"
   }
 }
