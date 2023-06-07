@@ -6,9 +6,7 @@
         <img slot="main-brand" :src="logoSrc" alt="CCN Consulting Pty Ltd" />
         <img slot="main-brand-on-dark" :src="logoSrc" alt="CCN Consulting Pty Ltd" />
         <div slot="co-brand">
-          <div class="text-size-1">
-            <b>CCN Consulting Pty Ltd</b>
-          </div>
+          <div class="sitename">CCN Consulting Pty Ltd</div>
           <div class="text-size-0 d-none d-block-desktop">
             {{ content.slogan }}
           </div>
@@ -91,6 +89,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.sitename {
+  font-weight: bold;
+  font-family: var(--go-heading-font-family);
+}
 app-header {
   position: sticky;
   top: 0;

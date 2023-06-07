@@ -112,10 +112,12 @@ export default defineComponent({
 <style lang="scss">
 #app {
   go-hero {
+    --hero-text-box-padding: 2rem 0;
     --hero-text-flex-basis: 100%;
     --hero-image-flex-basis: 0;
     .hero-text {
       text-shadow: 0 0 1rem var(--go-color-bg);
+      font-weight: normal;
       backdrop-filter: none;
     }
     .hero-text-bg {
