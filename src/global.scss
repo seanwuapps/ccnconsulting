@@ -4,3 +4,20 @@
 main {
   font-weight: 300;
 }
+
+.info-list{ 
+  list-style: none;
+  padding: 0;
+  li {
+    display: flex;
+    padding: 0.5em 0;
+    gap: 4px;
+    font-weight: normal;
+    &:hover {
+      background: var(--go-color-neutral-100);
+    }
+    * {
+      flex-basis: 50%;
+    }
+  }
+}

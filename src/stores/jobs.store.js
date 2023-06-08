@@ -45,6 +45,11 @@ const formatJobDetails = (record) => {
     ...formatJobCard(record),
     essentialCriteria: record.get('Essential criteria'),
     desirableCriteria: record.get('Desirable criteria'),
+    duration: record.get('Initial contract duration'),
+    extensionTerm: record.get('Extension term'),
+    extensionCount: record.get('Number of extensions'),
+    workingArrangements: record.get('Working arrangements'),
+    clearance: record.get('Security clearance'),
   };
 };
 

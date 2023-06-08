@@ -33,7 +33,28 @@
           </li>
         </ul>
 
-        <div v-auto-animate>
+        <div>
+          <!-- info banner -->
+          <GoCard class="mb-4" card-title="Contract information">
+            <ul class="info-list">
+              <li>
+                <strong>Contract duration</strong>
+                <span>{{ job.duration || 'Unknown' }}</span>
+              </li>
+              <li>
+                <strong>Extension term</strong>
+                <span>{{ job.extensionTerm || 'Unknown' }}</span>
+              </li>
+              <li>
+                <strong>Number of extensions</strong>
+                <span>{{ job.extensionCount || 'Unknown' }}</span>
+              </li>
+              <li>
+                <strong>Security clearance</strong>
+                <span>{{ job.clearance || 'Unknown' }}</span>
+              </li>
+            </ul>
+          </GoCard>
           <!-- description -->
           <div v-if="job.description">
             <h2>Requirements</h2>
@@ -48,6 +69,11 @@
             <h2>Desirable criteria</h2>
             <GoMd :content="job.desirableCriteria"></GoMd>
           </div>
+
+          <div v-if="job.workingArrangements">
+            <h2>Working arrangements</h2>
+            <GoMd :content="job.workingArrangements"></GoMd>
+          </div>
         </div>
       </GoContentLayout>
     </div>
@@ -58,7 +84,7 @@
 </template>
 
 <script lang="ts">
-import { GoButton, GoChip, GoContentLayout, GoIcon, GoMd, GoSpinner } from '@go-ui/vue';
+import { GoButton, GoChip, GoCard, GoContentLayout, GoIcon, GoMd, GoSpinner, GoTableWrapper } from '@go-ui/vue';
 import { useJobsStore } from '@/stores/jobs.store';
 import { defineComponent } from 'vue';
 
@@ -67,7 +93,7 @@ export default defineComponent({
     const jobStore = useJobsStore();
     return { jobStore };
   },
-  components: { GoSpinner, GoChip, GoIcon, GoMd, GoContentLayout, GoButton },
+  components: { GoSpinner, GoChip, GoCard, GoIcon, GoMd, GoContentLayout, GoButton, GoTableWrapper },
   watch: {
     '$route.params.slug': {
       immediate: true,
