@@ -12,8 +12,8 @@
   </GoHero>
   <div class="container">
     <GoSpinner class="mt-2" v-if="jobsStore.fetchingList">Fetching jobs...</GoSpinner>
-    <div class="pt-4 pb-4" v-else-if="jobsStore.filteredList?.length > 0" v-auto-animate>
-      <JobCard class="mb-2" :job="job" v-for="job in jobsStore.filteredList" />
+    <div class="pt-4 pb-4" v-else-if="jobsStore.filteredList?.length > 0">
+      <JobCard class="mr-2 mb-2" :job="job" v-for="job in jobsStore.filteredList" />
     </div>
     <div v-else>
       <div class="mt-4">Sorry, we cannot find any job opening at this time. Please try again later.</div>

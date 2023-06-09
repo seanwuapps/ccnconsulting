@@ -11,7 +11,7 @@
       border
       :class="{ 'job-card': true, closed: job.isClosed }">
       <div class="job-card-chip" slot="pre-title">
-        <GoChip v-if="!job.isClosed" variant="success">
+        <GoChip v-if="!job.isClosed">
           <div>Closing {{ job.closingDateRelative }}</div>
         </GoChip>
         <GoChip v-else variant="neutral">Closed</GoChip>

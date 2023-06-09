@@ -125,4 +125,24 @@ ul.feature-list {
     color: var(--go-color-neutral-700);
   }
 }
+.info-list {
+  padding: 0;
+  border: 1px solid var(--go-color-neutral-100);
+  border-radius: var(--radius-2);
+  list-style: none;
+  padding: 0;
+  li {
+    display: flex;
+    margin: 0;
+    padding: 1em;
+    gap: 4px;
+    font-weight: normal;
+    * {
+      flex-basis: 50%;
+    }
+  }
+  li:nth-child(2n-1) {
+    background: var(--go-color-neutral-100);
+  }
+}
 </style>
