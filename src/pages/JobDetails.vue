@@ -35,7 +35,7 @@
 
         <div>
           <!-- info banner -->
-          <GoCard class="mb-4" card-title="Contract information">
+          <GoCard class="mb-4" card-title="Contract information" border>
             <ul class="info-list">
               <li>
                 <strong>Contract duration</strong>

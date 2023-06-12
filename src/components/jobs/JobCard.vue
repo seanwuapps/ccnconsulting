@@ -7,7 +7,6 @@
       heading-tag="h3"
       :href="href"
       @click="navigate"
-      flat
       border
       :class="{ 'job-card': true, closed: job.isClosed }">
       <div class="job-card-chip" slot="pre-title">

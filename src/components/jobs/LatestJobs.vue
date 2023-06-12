@@ -1,11 +1,15 @@
 <template>
   <div v-if="jobsStore.latest.length > 0">
-    <go-heading-row heading="Latest jobs" more-link-href="/jobs" more-link-text="View all jobs"></go-heading-row>
-    <div class="row mt-4">
-      <div class="col-12 col-tablet-6 col-desktop-4" v-for="job in jobsStore.latest">
-        <JobCard :job="job" />
-      </div>
-    </div>
+    <GoCardRow
+      cols="1"
+      cols-tablet="1"
+      cols-desktop="3"
+      cols-large="3"
+      heading="Latest jobs"
+      more-link-href="/jobs"
+      more-link-text="View all jobs">
+      <JobCard :job="job" v-for="job in jobsStore.latest" />
+    </GoCardRow>
   </div>
 </template>
 
@@ -13,6 +17,7 @@
 import { useJobsStore } from '@/stores/jobs.store';
 import { onMounted } from 'vue';
 import JobCard from './JobCard.vue';
+import { GoCardRow } from '@go-ui/vue';
 const jobsStore = useJobsStore();
 onMounted(async () => {
   await jobsStore.fetchLatest();
