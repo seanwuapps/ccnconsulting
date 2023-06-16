@@ -9,8 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@go-ui/core": "^1.14.0",
-    "@go-ui/vue": "^1.4.0",
+    "@go-ui/vue": "^1.29.2",
     "airtable": "^0.12.1",
     "dayjs": "^1.11.8",
     "pinia": "^2.0.23",
