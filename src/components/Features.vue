@@ -4,8 +4,7 @@
     v-for="(feature, i) in services"
     :class="`feature-card ${i % 2 === 0 ? '' : 'alt'}`"
     :key="`feature-card-${i}`"
-    flat
-  >
+    flat>
     <div class="feature-card__img" v-if="feature.img">
       <img :src="feature.img" :alt="feature.imgAlt" />
     </div>
@@ -16,13 +15,13 @@
   </div>
 </template>
 <script lang="ts" setup>
-import content from "../content";
-import { GoMd } from "@go-ui/vue";
+import content from '../content';
+import { GoMd } from '@go-ui/vue';
 const { services } = content;
 </script>
 
 <style lang="scss">
-@import "@go-ui/core/src/global/scss/utils";
+@import '@go-ui/vue/dist/scss/utils';
 
 .feature-card {
   display: flex;
