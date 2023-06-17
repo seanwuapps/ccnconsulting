@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia';
-import Airtable from 'airtable';
+import Airtable, { Records, FieldSet } from 'airtable';
 import { AIRTABLE_KEY } from '../const';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+import { Job, JobDetails } from './job.type';
+import Fuse from 'fuse.js';
 
 dayjs.extend(relativeTime);
 dayjs.extend(isSameOrBefore);
@@ -13,7 +15,7 @@ const jobsBase = new Airtable({ apiKey: AIRTABLE_KEY }).base('appjb01Lr9hMbTruv'
 const DATE_DISPLAY_FORMAT = 'DD MMM YYYY';
 const DATETIME_DISPLAY_FORMAT = 'DD MMM YYYY';
 
-const formatJobCard = (record) => {
+const formatJobCard = (record: any) => {
   const title = record.get('Title');
   const buyer = record.get('Buyer');
   const location = record.get('Location');
@@ -40,7 +42,7 @@ const formatJobCard = (record) => {
   };
 };
 
-const formatJobDetails = (record) => {
+const formatJobDetails = (record: any) => {
   return {
     ...formatJobCard(record),
     essentialCriteria: record.get('Essential criteria'),
@@ -53,7 +55,7 @@ const formatJobDetails = (record) => {
   };
 };
 
-export async function fetchJobs(options) {
+export async function fetchJobs(options?: any): Promise<Records<FieldSet> | undefined> {
   return new Promise((resolve, reject) => {
     jobsBase
       .select({
@@ -78,12 +80,13 @@ export async function fetchJobs(options) {
 export const useJobsStore = defineStore('jobs', {
   state: () => {
     return {
-      latest: [],
-      currentJob: null,
+      latest: [] as Job[],
+      currentJob: null as JobDetails | null,
       fetchingDetails: false,
-      list: [],
+      list: [] as Job[],
       fetchingList: false,
       listFilters: {
+        query: '',
         showClosed: false,
       },
     };
@@ -91,6 +94,26 @@ export const useJobsStore = defineStore('jobs', {
   getters: {
     filteredList(state) {
       let result = state.list;
+      if (state.listFilters.query.length > 0) {
+        // const options = {
+        //   keys: ['title', 'buyer', 'location', 'blurb', 'description'],
+        // };
+        // const fuse = new Fuse(result, options);
+        // const searchResult = fuse.search(state.listFilters.query);
+        // console.log(searchResult);
+        // result = searchResult.map(({ item }) => item);
+
+        const keys = ['title', 'buyer', 'location', 'blurb', 'description'] as const;
+        result = result.filter((item) => {
+          return keys.some((key) => {
+            const value = item[key];
+            return value.toLowerCase().includes(state.listFilters.query.toLowerCase());
+          });
+        });
+      } else {
+        result = state.list;
+      }
+
       if (!state.listFilters.showClosed) {
         result = result.filter((job) => !job.isClosed);
       }
@@ -102,7 +125,9 @@ export const useJobsStore = defineStore('jobs', {
       this.fetchingList = true;
       try {
         const records = await fetchJobs();
-        this.list = records.map(formatJobCard);
+        if (records) {
+          this.list = records.map(formatJobCard);
+        }
       } finally {
         this.fetchingList = false;
       }
@@ -112,19 +137,26 @@ export const useJobsStore = defineStore('jobs', {
         // Selecting the first 3 records in Grid view:
         maxRecords: n,
       });
-      this.latest = records.map(formatJobCard);
+      if (records) {
+        this.latest = records.map(formatJobCard);
+      }
     },
-    async fetchJob(slug) {
+    async fetchJob(slug: string) {
       this.fetchingDetails = true;
       try {
         const records = await fetchJobs({
           maxRecords: 1,
           filterByFormula: `{Slug} = '${slug}'`,
         });
-        this.currentJob = formatJobDetails(records[0]);
+        if (records && records.length > 0) {
+          this.currentJob = formatJobDetails(records[0]);
+        }
       } finally {
         this.fetchingDetails = false;
       }
+    },
+    async search(query: string) {
+      this.listFilters.query = query;
     },
   },
 });

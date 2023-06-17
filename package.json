@@ -9,9 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@go-ui/vue": "^1.29.2",
+    "@go-ui/vue": "^1.29.3",
     "airtable": "^0.12.1",
     "dayjs": "^1.11.8",
+    "fuse.js": "^6.6.2",
     "pinia": "^2.0.23",
     "vue": "^3.2.37",
     "vue-router": "^4.1.6"

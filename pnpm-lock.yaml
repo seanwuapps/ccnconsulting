@@ -6,14 +6,17 @@ settings:
 
 dependencies:
   '@go-ui/vue':
-    specifier: ^1.29.2
-    version: 1.29.2
+    specifier: ^1.29.3
+    version: 1.29.3
   airtable:
     specifier: ^0.12.1
     version: 0.12.1
   dayjs:
     specifier: ^1.11.8
     version: 1.11.8
+  fuse.js:
+    specifier: ^6.6.2
+    version: 6.6.2
   pinia:
     specifier: ^2.0.23
     version: 2.0.23(typescript@4.8.4)(vue@3.2.41)
@@ -284,8 +287,8 @@ packages:
       '@floating-ui/core': 1.2.6
     dev: false
 
-  /@go-ui/core@1.29.2:
-    resolution: {integrity: sha512-cErWRhv54GYXEfHDlOfOwi7DGNCDRPYXP4k+2F9ob+2G6HQE4VHIZE4joOaGBH6QRcnuZmbCUQMj0/l4IqKfow==}
+  /@go-ui/core@1.29.3:
+    resolution: {integrity: sha512-tUrCCaGfVH53vWQpe0TwIl3GJZ9upNrOmrAsCnRoD4JoW8Thxf3CoaKT88oovGgGw3iIpy9f2AiVP2++c/fEHQ==}
     dependencies:
       '@duetds/date-picker': 1.4.0
       '@floating-ui/dom': 1.2.6
@@ -299,11 +302,11 @@ packages:
       open-props: 1.5.7
     dev: false
 
-  /@go-ui/vue@1.29.2:
-    resolution: {integrity: sha512-gFRA36Psv95J8NKXHKxMDiGqCa5DoDSJcAeImzPzs38fYBJhNh715ASKKbEWEt5WMzLUgKqfOiMsZguOUrnkgQ==}
+  /@go-ui/vue@1.29.3:
+    resolution: {integrity: sha512-iGiSJJ/HMD55ZCo3zXAHnAlRQx0SlmipmiLFfW4Z3vdU3jxakUG8PtMZm5ZOoKsdm9CA2YDRJlt/0ks0iiQK3g==}
     dependencies:
       '@duetds/date-picker': 1.4.0
-      '@go-ui/core': 1.29.2
+      '@go-ui/core': 1.29.3
     dev: false
 
   /@stencil/core@2.22.3:
@@ -595,6 +598,11 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /fuse.js@6.6.2:
+    resolution: {integrity: sha512-cJaJkxCCxC8qIIcPBF9yGxY0W/tVZS3uEISDxhYIdtk8OL93pe+6Zj7LjCqVV4dzbqcriOZ+kQ/NE4RXZHsIGA==}
+    engines: {node: '>=10'}
+    dev: false
 
   /glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
