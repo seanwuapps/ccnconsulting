@@ -10,6 +10,9 @@
       <label class="mr-2">+ Fee ($) <input type="number" v-model="marginDollar" />/hr</label>
     </div>
     <div class="mt-4">
+      <label> <input type="checkbox" v-model="usePayrollTax" /> Calculate payroll tax </label>
+    </div>
+    <div class="mt-4">
       <label> <input type="checkbox" v-model="usePayroll" /> Use CCN as Payroll company </label>
 
       <div class="mt-2">
@@ -46,6 +49,28 @@
         </table>
       </go-table-wrapper>
 
+      <div v-if="usePayrollTax">
+        <h4>Payroll tax</h4>
+        <go-table-wrapper>
+          <table>
+            <tbody>
+              <tr>
+                <td>ACT Payroll tax rate</td>
+                <td>{{ payrollTaxPercent }}%</td>
+              </tr>
+              <tr>
+                <td>ACT Payroll Tax Payable</td>
+                <td>{{ toMoney(payrollTax) }} (Candidate rate * payroll tax rate)</td>
+              </tr>
+              <tr>
+                <td>Candidate rate after payroll tax</td>
+                <td>{{ toMoney(payrollStartingRate) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </go-table-wrapper>
+      </div>
+
       <div v-if="usePayroll">
         <h4>Payroll breakdown</h4>
         <go-table-wrapper>
@@ -59,7 +84,7 @@
             <tbody>
               <tr>
                 <td>Total value</td>
-                <td>{{ toMoney(candidateRate) }}</td>
+                <td>{{ toMoney(payrollStartingRate) }}</td>
               </tr>
               <tr>
                 <td>CCN Payroll fee</td>
@@ -100,6 +125,8 @@ export default defineComponent({
       usePayroll: true,
       payrollFeePercent: 1.5,
       superanuationPercent: 11,
+      usePayrollTax: false,
+      payrollTaxPercent: 6.85,
     };
   },
   computed: {
@@ -114,6 +141,12 @@ export default defineComponent({
     },
     superanuation() {
       return (this.candidateRate * this.superanuationPercent) / 100;
+    },
+    payrollTax() {
+      return (this.candidateRate * this.payrollTaxPercent) / 100;
+    },
+    payrollStartingRate() {
+      return this.usePayrollTax ? this.candidateRate - this.payrollTax : this.candidateRate;
     },
   },
   methods: {
