@@ -90,6 +90,14 @@
                 <td>CCN Payroll fee</td>
                 <td>{{ toMoney(payrollFee) }} ({{ payrollFeePercent }}%)</td>
               </tr>
+
+              <tr>
+                <td>Candidate pre-super rate</td>
+                <td>
+                  <strong>{{ toMoney(preSuperRate) }}</strong>
+                </td>
+              </tr>
+
               <tr>
                 <td>Superanuation</td>
                 <td>{{ toMoney(superanuation) }} ({{ superanuationPercent }}%)</td>
@@ -139,8 +147,11 @@ export default defineComponent({
     payrollFee() {
       return (this.candidateRate * this.payrollFeePercent) / 100;
     },
+    preSuperRate() {
+      return this.candidateRate - this.payrollFee;
+    },
     superanuation() {
-      return (this.candidateRate * this.superanuationPercent) / 100;
+      return (this.preSuperRate * this.superanuationPercent) / 100;
     },
     payrollTax() {
       return (this.candidateRate * this.payrollTaxPercent) / 100;
