@@ -138,7 +138,7 @@ export default defineComponent({
             background-image: radial-gradient(
               circle farthest-corner at var(--x) var(--y),
               rgba(var(--go-token-lightest), 1) 0%,
-              rgba(var(--go-token-secondary-300), 0.6) 20%,
+              rgba(var(--go-token-secondary-400), 0.6) 20%,
               rgba(var(--go-token-success-600), 0.9) 50%,
               transparent 100%
             );
@@ -148,7 +148,7 @@ export default defineComponent({
             -webkit-user-select: none; // Safari
             -webkit-background-clip: text; /* clip the background to the text inside the tag*/
             -webkit-text-fill-color: transparent;
-            opacity: 0.3;
+            opacity: 0.4;
           }
         }
       }
