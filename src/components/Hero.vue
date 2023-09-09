@@ -25,7 +25,7 @@ import { GoHero, GoMd } from '@go-ui/vue';
 import content from '../content';
 const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-function makeString(length = 5000) {
+function makeString(length = 4000) {
   let result = '';
   const charactersLength = characters.length;
   let counter = 0;
@@ -35,6 +35,8 @@ function makeString(length = 5000) {
   }
   return result;
 }
+
+const strings = Array.from({ length: 20 }, makeString);
 
 export default defineComponent({
   setup() {
@@ -53,14 +55,19 @@ export default defineComponent({
       x: 0,
       y: 0,
       reduceMotion: false,
+      index: 0,
     };
   },
   mounted() {
     this.heroBgRect = (this.$refs.hero as InstanceType<typeof GoHero>).$el.getBoundingClientRect();
-    this.letters = makeString();
+    this.setLetters();
     this.reduceMotion = window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;
   },
   methods: {
+    setLetters() {
+      this.letters = strings[this.index];
+      this.index = (this.index + 1) % strings.length;
+    },
     handleMouseMove(e) {
       const { clientX, clientY } = e;
       this.setXY(clientX, clientY);
@@ -76,10 +83,11 @@ export default defineComponent({
       if (!this.heroBgRect) {
         return;
       }
-      this.letters = makeString();
+      this.setLetters();
+
       const { left, top } = this.heroBgRect;
       this.x = clientX - left;
-      this.y = clientY - top - 30;
+      this.y = clientY - top - 40;
     },
   },
 });
@@ -127,13 +135,12 @@ export default defineComponent({
             word-break: break-all;
             font-size: clamp(1rem, 0.8vw, 2rem);
             font-family: monospace;
-            font-weight: 300;
             background-image: radial-gradient(
               circle farthest-corner at var(--x) var(--y),
-              rgba(var(--go-token-secondary-100), 1) 0%,
-              rgba(var(--go-token-secondary-400), 0.6) 20%,
-              rgba(var(--go-token-success-700), 0.9) 50%,
-              rgba(var(--go-token-lightest), 0) 100%
+              rgba(var(--go-token-lightest), 1) 0%,
+              rgba(var(--go-token-secondary-300), 0.6) 20%,
+              rgba(var(--go-token-success-600), 0.9) 50%,
+              transparent 100%
             );
             user-select: none; // chrome and Opera
             -moz-user-select: none; // Firefox
@@ -141,7 +148,7 @@ export default defineComponent({
             -webkit-user-select: none; // Safari
             -webkit-background-clip: text; /* clip the background to the text inside the tag*/
             -webkit-text-fill-color: transparent;
-            opacity: 0.5;
+            opacity: 0.3;
           }
         }
       }

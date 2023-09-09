@@ -7,7 +7,7 @@ export default {
     description: `
 Outcome driven consulting services for digital projects
 
-<go-button variant="primary" flat round href="#contact-us">Start a conversation</go-button>
+<go-button variant="primary" round href="#contact-us">Start a conversation</go-button>
 `,
   },
   about: `
@@ -43,19 +43,23 @@ We know how important it is to deliver quality work on time and we're committed 
   ],
   contact: {
     text: `
-**Email:** <a href="mailto:hello@ccnconsulting.com.au">hello@ccnconsulting.com.au</a>
 
-**Location:** Canberra, Australia
+#### Are you a skilled individual looking for the next chapter of your career?
+
+Connect with us and we will be in touch with you to see how we can empower you to do great things.
+
+<go-button variant="primary" round block="tablet" target="_blank" href="https://form.jotform.com/230490537104045">
+Tell us about yourself
+<svg slot="prefix" xmlns="http://www.w3.org/2000/svg" style="fill:currentColor" viewBox="0 0 24 24"><path d="M20.56 3.34a1 1 0 0 0-1-.08l-17 8a1 1 0 0 0-.57.92 1 1 0 0 0 .6.9L8 15.45v6.72L13.84 18l4.76 2.08a.93.93 0 0 0 .4.09 1 1 0 0 0 .52-.15 1 1 0 0 0 .48-.79l1-15a1 1 0 0 0-.44-.89ZM18.1 17.68l-5.27-2.31L16 9.17l-7.65 4.25-2.93-1.29 13.47-6.34Z"/></svg>
+</go-button>
+
 `,
   },
   join: {
     text: `
-Connect with us and we will be in touch with you to see how we can empower you to do great things.
+**Email:** <a href="mailto:hello@ccnconsulting.com.au">hello@ccnconsulting.com.au</a>
 
-<go-button variant="primary" round block="tablet" target="_blank" href="https://form.jotform.com/230490537104045">
-Start a conversation
-<svg slot="prefix" xmlns="http://www.w3.org/2000/svg" style="fill:currentColor" viewBox="0 0 24 24"><path d="M20.56 3.34a1 1 0 0 0-1-.08l-17 8a1 1 0 0 0-.57.92 1 1 0 0 0 .6.9L8 15.45v6.72L13.84 18l4.76 2.08a.93.93 0 0 0 .4.09 1 1 0 0 0 .52-.15 1 1 0 0 0 .48-.79l1-15a1 1 0 0 0-.44-.89ZM18.1 17.68l-5.27-2.31L16 9.17l-7.65 4.25-2.93-1.29 13.47-6.34Z"/></svg>
-</go-button>`,
+**Location:** Canberra, Australia`,
   },
   footer: {
     copyright: `&copy; ${new Date().getFullYear()} CCN Consulting Pty Ltd`,
