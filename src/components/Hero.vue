@@ -1,91 +1,19 @@
 <template>
-  <GoHero :heading="content.hero.heading" class="hero">
-    <div id="bg-wrap" slot="full-width-bg">
-      <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <radialGradient id="Gradient1" cx="50%" cy="50%" fx="0.441602%" fy="50%" r=".5">
-            <animate attributeName="fx" dur="120s" values="0%;3%;0%" repeatCount="indefinite"></animate>
-            <stop offset="0%" stop-color="rgba(255, 0, 255, 1)"></stop>
-            <stop offset="100%" stop-color="rgba(255, 0, 255, 0)"></stop>
-          </radialGradient>
-          <radialGradient id="Gradient2" cx="50%" cy="50%" fx="2.68147%" fy="50%" r=".5">
-            <animate attributeName="fx" dur="23.5s" values="0%;3%;0%" repeatCount="indefinite"></animate>
-            <stop offset="0%" stop-color="rgba(255, 255, 0, 1)"></stop>
-            <stop offset="100%" stop-color="rgba(255, 255, 0, 0)"></stop>
-          </radialGradient>
-          <radialGradient id="Gradient3" cx="50%" cy="50%" fx="0.836536%" fy="50%" r=".5">
-            <animate attributeName="fx" dur="21.5s" values="0%;3%;0%" repeatCount="indefinite"></animate>
-            <stop offset="0%" stop-color="rgba(0, 255, 255, 1)"></stop>
-            <stop offset="100%" stop-color="rgba(0, 255, 255, 0)"></stop>
-          </radialGradient>
-          <radialGradient id="Gradient4" cx="50%" cy="50%" fx="4.56417%" fy="50%" r=".5">
-            <animate attributeName="fx" dur="23s" values="0%;5%;0%" repeatCount="indefinite"></animate>
-            <stop offset="0%" stop-color="rgba(0, 255, 0, 1)"></stop>
-            <stop offset="100%" stop-color="rgba(0, 255, 0, 0)"></stop>
-          </radialGradient>
-          <radialGradient id="Gradient5" cx="50%" cy="50%" fx="2.65405%" fy="50%" r=".5">
-            <animate attributeName="fx" dur="24.5s" values="0%;5%;0%" repeatCount="indefinite"></animate>
-            <stop offset="0%" stop-color="rgba(0,0,255, 1)"></stop>
-            <stop offset="100%" stop-color="rgba(0,0,255, 0)"></stop>
-          </radialGradient>
-          <radialGradient id="Gradient6" cx="50%" cy="50%" fx="0.981338%" fy="50%" r=".5">
-            <animate attributeName="fx" dur="25.5s" values="0%;5%;0%" repeatCount="indefinite"></animate>
-            <stop offset="0%" stop-color="rgba(255,0,0, 1)"></stop>
-            <stop offset="100%" stop-color="rgba(255,0,0, 0)"></stop>
-          </radialGradient>
-        </defs>
-        <rect
-          x="13.744%"
-          y="1.18473%"
-          width="100%"
-          height="100%"
-          fill="url(#Gradient1)"
-          transform="rotate(334.41 50 50)">
-          <animate attributeName="x" dur="20s" values="25%;0%;25%" repeatCount="indefinite"></animate>
-          <animate attributeName="y" dur="21s" values="0%;25%;0%" repeatCount="indefinite"></animate>
-          <animateTransform
-            attributeName="transform"
-            type="rotate"
-            from="0 50 50"
-            to="360 50 50"
-            dur="7s"
-            repeatCount="indefinite"></animateTransform>
-        </rect>
-        <rect
-          x="-2.17916%"
-          y="35.4267%"
-          width="100%"
-          height="100%"
-          fill="url(#Gradient2)"
-          transform="rotate(255.072 50 50)">
-          <animate attributeName="x" dur="23s" values="-25%;0%;-25%" repeatCount="indefinite"></animate>
-          <animate attributeName="y" dur="24s" values="0%;50%;0%" repeatCount="indefinite"></animate>
-          <animateTransform
-            attributeName="transform"
-            type="rotate"
-            from="0 50 50"
-            to="360 50 50"
-            dur="12s"
-            repeatCount="indefinite"></animateTransform>
-        </rect>
-        <rect
-          x="9.00483%"
-          y="14.5733%"
-          width="100%"
-          height="100%"
-          fill="url(#Gradient3)"
-          transform="rotate(139.903 50 50)">
-          <animate attributeName="x" dur="25s" values="0%;25%;0%" repeatCount="indefinite"></animate>
-          <animate attributeName="y" dur="12s" values="0%;25%;0%" repeatCount="indefinite"></animate>
-          <animateTransform
-            attributeName="transform"
-            type="rotate"
-            from="360 50 50"
-            to="0 50 50"
-            dur="9s"
-            repeatCount="indefinite"></animateTransform>
-        </rect>
-      </svg>
+  <GoHero
+    :heading="content.hero.heading"
+    class="hero"
+    @mousemove="handleMouseMove"
+    @touchmove="handleTouchMove"
+    ref="hero">
+    <div
+      aria-hidden="true"
+      id="bg-wrap"
+      slot="full-width-bg"
+      :style="{
+        '--x': `${x}px`,
+        '--y': `${y}px`,
+      }">
+      {{ letters }}
     </div>
     <GoMd md-options="{html: true}" :content="content.hero.description"></GoMd>
   </GoHero>
@@ -95,6 +23,18 @@
 import { defineComponent } from 'vue';
 import { GoHero, GoMd } from '@go-ui/vue';
 import content from '../content';
+const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+function makeString(length = 5000) {
+  let result = '';
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  return result;
+}
 
 export default defineComponent({
   setup() {
@@ -106,17 +46,55 @@ export default defineComponent({
     GoHero,
     GoMd,
   },
+  data() {
+    return {
+      letters: makeString(),
+      heroBgRect: null as DOMRect | null,
+      x: 0,
+      y: 0,
+      reduceMotion: false,
+    };
+  },
+  mounted() {
+    this.heroBgRect = (this.$refs.hero as InstanceType<typeof GoHero>).$el.getBoundingClientRect();
+    this.letters = makeString();
+    this.reduceMotion = window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;
+  },
+  methods: {
+    handleMouseMove(e) {
+      const { clientX, clientY } = e;
+      this.setXY(clientX, clientY);
+    },
+    handleTouchMove(e) {
+      const { clientX, clientY } = e.touches[0];
+      this.setXY(clientX, clientY);
+    },
+    setXY(clientX = 0, clientY = 0) {
+      if (this.reduceMotion) {
+        return;
+      }
+      if (!this.heroBgRect) {
+        return;
+      }
+      this.letters = makeString();
+      const { left, top } = this.heroBgRect;
+      this.x = clientX - left;
+      this.y = clientY - top;
+    },
+  },
 });
 </script>
 
 <style lang="scss">
 #app {
+  .hero {
+    overflow: hidden;
+  }
   go-hero {
     --hero-text-box-padding: 2rem 0;
     --hero-text-flex-basis: 100%;
     --hero-image-flex-basis: 0;
     .hero-text {
-      text-shadow: 0 0 1rem var(--go-color-bg);
       font-weight: normal;
       backdrop-filter: none;
     }
@@ -127,16 +105,41 @@ export default defineComponent({
   .home {
     go-hero {
       --hero-full-width-bg-padding: 0;
+      --hero-bg-color: black;
+      --hero-fg-color: white;
+      .hero-text {
+        text-shadow: 0 0 1rem var(--hero-fg-color);
+      }
       .full-width-bg {
         transform: none;
         top: 0;
         left: 0;
         bottom: 0;
         right: 0;
-        * {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+        #bg-wrap {
+          display: none;
+          @supports (background-clip: text) or (-webkit-background-clip: text) {
+            aspect-ratio: 1;
+            display: block;
+            word-break: break-all;
+            font-size: clamp(1rem, 0.8vw, 2rem);
+            font-family: monospace;
+            font-weight: 300;
+            background-image: radial-gradient(
+              farthest-corner at var(--x) var(--y),
+              var(--hero-fg-color) 0%,
+              rgba(var(--go-token-secondary-500), 0.6) 15%,
+              rgba(var(--go-token-success-600), 0.9) 50%,
+              rgba(var(--go-token-lightest), 0) 100%
+            );
+            user-select: none; // chrome and Opera
+            -moz-user-select: none; // Firefox
+            -webkit-text-select: none; // IOS Safari
+            -webkit-user-select: none; // Safari
+            -webkit-background-clip: text; /* clip the background to the text inside the tag*/
+            -webkit-text-fill-color: transparent;
+            opacity: 0.5;
+          }
         }
       }
     }
