@@ -11,7 +11,7 @@
       border
       :class="{ 'job-card': true, closed: job.isClosed }">
       <div class="job-card-chip" slot="pre-title">
-        <GoChip v-if="!job.isClosed">
+        <GoChip variant="info" v-if="!job.isClosed">
           <div>Closing {{ job.closingDateRelative }}</div>
         </GoChip>
         <GoChip v-else variant="neutral">Closed</GoChip>
@@ -42,13 +42,3 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="scss">
-.job-card {
-  &.closed {
-    opacity: 0.6;
-  }
-  // .job-card-chip {
-  //   float: right;
-  // }
-}
-</style>

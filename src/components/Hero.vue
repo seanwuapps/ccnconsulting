@@ -79,7 +79,7 @@ export default defineComponent({
       this.letters = makeString();
       const { left, top } = this.heroBgRect;
       this.x = clientX - left;
-      this.y = clientY - top;
+      this.y = clientY - top - 30;
     },
   },
 });
@@ -108,6 +108,7 @@ export default defineComponent({
       --hero-bg-color: black;
       --hero-fg-color: white;
       .hero-text {
+        text-align: center;
         text-shadow: 0 0 1rem var(--hero-fg-color);
       }
       .full-width-bg {
@@ -119,6 +120,8 @@ export default defineComponent({
         #bg-wrap {
           display: none;
           @supports (background-clip: text) or (-webkit-background-clip: text) {
+            --x: 50%;
+            --y: 50%;
             aspect-ratio: 1;
             display: block;
             word-break: break-all;
@@ -126,10 +129,10 @@ export default defineComponent({
             font-family: monospace;
             font-weight: 300;
             background-image: radial-gradient(
-              farthest-corner at var(--x) var(--y),
-              var(--hero-fg-color) 0%,
-              rgba(var(--go-token-secondary-500), 0.6) 15%,
-              rgba(var(--go-token-success-600), 0.9) 50%,
+              circle farthest-corner at var(--x) var(--y),
+              rgba(var(--go-token-secondary-100), 1) 0%,
+              rgba(var(--go-token-secondary-400), 0.6) 20%,
+              rgba(var(--go-token-success-700), 0.9) 50%,
               rgba(var(--go-token-lightest), 0) 100%
             );
             user-select: none; // chrome and Opera
