@@ -148,7 +148,7 @@ export default defineComponent({
       return (this.candidateRate * this.payrollFeePercent) / 100;
     },
     preSuperRate() {
-      return this.candidateRate - this.payrollFee;
+      return this.payrollStartingRate - this.payrollFee;
     },
     superanuation() {
       return (this.preSuperRate * this.superanuationPercent) / 100;
