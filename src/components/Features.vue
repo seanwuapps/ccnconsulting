@@ -21,8 +21,6 @@ const { services } = content;
 </script>
 
 <style lang="scss">
-@import '@go-ui/vue/dist/scss/utils';
-
 .feature-card {
   display: flex;
   flex-direction: column;

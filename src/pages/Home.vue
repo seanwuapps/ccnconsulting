@@ -46,7 +46,6 @@ console.groupEnd();
 </template>
 
 <style lang="scss">
-@import '@go-ui/vue/dist/scss/utils';
 html {
   overflow-x: hidden;
 }

@@ -20,7 +20,6 @@ import { GoMd } from '@go-ui/vue';
 import content from '../content';
 </script>
 <style lang="scss">
-@import '@go-ui/vue/dist/scss/utils';
 .abn {
   text-align: start;
   @include tablet {

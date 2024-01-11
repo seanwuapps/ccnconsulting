@@ -45,7 +45,6 @@
 
 <script lang="ts">
 import { GoIcon, GoMainNav, GoHeaderBar, GoButton, GoGovAuLogo, GoSkipLink, GoNavDrawer } from '@go-ui/vue';
-import { INavItem } from '@go-ui/core/dist/types/interfaces';
 import { defineComponent } from 'vue';
 import { useThemeStore } from '../stores/theme.store';
 import content from '../content';
@@ -58,7 +57,7 @@ export default defineComponent({
   },
   data() {
     let logoSrc = '/img/logo.svg';
-    let navItems: INavItem[] = [
+    let navItems: any[] = [
       {
         label: 'Home',
         url: '/',

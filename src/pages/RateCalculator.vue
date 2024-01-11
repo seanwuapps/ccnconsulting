@@ -1,22 +1,37 @@
 <template>
   <div class="container">
     <h1>Rate calculator</h1>
-    <div class="mt-4">
-      <label class="mr-2">Department rate ($/hr)</label>
-      <input type="number" v-model="departmentRate" />
-    </div>
-    <div class="mt-4">
-      <label class="mr-2">Fee (%) <input type="number" v-model="marginPercent" />%</label>
-      <label class="mr-2">+ Fee ($) <input type="number" v-model="marginDollar" />/hr</label>
-    </div>
-    <div class="mt-4">
-      <label> <input type="checkbox" v-model="usePayrollTax" /> Calculate payroll tax </label>
-    </div>
-    <div class="mt-4">
-      <label> <input type="checkbox" v-model="usePayroll" /> Use CCN as Payroll company </label>
-
-      <div class="mt-2">
-        <label>Fee (%) <input type="number" v-model="payrollFeePercent" />%</label>
+    <div class="row">
+      <div class="col-desktop-8">
+        <div class="mt-4">
+          <GoInput type="number" label="Department rate" v-model="departmentRate">
+            <span slot="prefix">$</span>
+            <span slot="suffix">/hr</span>
+          </GoInput>
+        </div>
+        <div class="mt-4 row">
+          <div class="col-6">
+            <GoInput type="number" label="Fee (%)" v-model="marginPercent">
+              <span slot="suffix">%</span>
+            </GoInput>
+          </div>
+          <div class="col-6">
+            <GoInput type="number" label="Fee ($)" v-model="marginDollar">
+              <span slot="suffix">/hr</span>
+            </GoInput>
+          </div>
+        </div>
+        <div class="mt-4">
+          <GoSwitch label="Calculate payroll tax" v-model="usePayrollTax" />
+        </div>
+        <div class="mt-4">
+          <GoSwitch label="Use CCN as Payroll company" v-model="usePayroll" />
+        </div>
+        <div class="mt-2" v-if="usePayroll">
+          <GoInput type="number" label="Payroll fee (%)" v-model="payrollFeePercent">
+            <span slot="suffix">%</span>
+          </GoInput>
+        </div>
       </div>
     </div>
 
@@ -49,9 +64,9 @@
         </table>
       </go-table-wrapper>
 
-      <div v-if="usePayrollTax">
+      <div class="mt-2" v-if="usePayrollTax">
         <h4>Payroll tax</h4>
-        <go-table-wrapper>
+        <go-table-wrapper bordered striped>
           <table>
             <tbody>
               <tr>
@@ -71,9 +86,9 @@
         </go-table-wrapper>
       </div>
 
-      <div v-if="usePayroll">
+      <div class="mt-2" v-if="usePayroll">
         <h4>Payroll breakdown</h4>
-        <go-table-wrapper>
+        <go-table-wrapper bordered striped>
           <table>
             <thead>
               <tr>
@@ -111,7 +126,7 @@
 </template>
 
 <script lang="ts" setup>
-import { GoInput } from '@go-ui/vue';
+import { GoInput, GoSwitch } from '@go-ui/vue';
 import { defineComponent } from 'vue';
 </script>
 
@@ -139,22 +154,22 @@ export default defineComponent({
   },
   computed: {
     candidateRate() {
-      return this.departmentRate - this.ccnFee;
+      return Number(this.departmentRate) - this.ccnFee;
     },
     ccnFee() {
-      return (this.departmentRate * this.marginPercent) / 100 + this.marginDollar;
+      return (Number(this.departmentRate) * Number(this.marginPercent)) / 100 + Number(this.marginDollar);
     },
     payrollFee() {
-      return (this.candidateRate * this.payrollFeePercent) / 100;
+      return (this.candidateRate * Number(this.payrollFeePercent)) / 100;
     },
     preSuperRate() {
       return this.payrollStartingRate - this.payrollFee;
     },
     superanuation() {
-      return (this.preSuperRate * this.superanuationPercent) / 100;
+      return (this.preSuperRate * Number(this.superanuationPercent)) / 100;
     },
     payrollTax() {
-      return (this.candidateRate * this.payrollTaxPercent) / 100;
+      return (this.candidateRate * Number(this.payrollTaxPercent)) / 100;
     },
     payrollStartingRate() {
       return this.usePayrollTax ? this.candidateRate - this.payrollTax : this.candidateRate;

@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@go-ui/vue':
-    specifier: ^1.29.3
-    version: 1.29.3
+    specifier: ^1.34.1
+    version: 1.34.1(vue@3.2.41)
   airtable:
     specifier: ^0.12.1
     version: 0.12.1
@@ -287,12 +287,13 @@ packages:
       '@floating-ui/core': 1.2.6
     dev: false
 
-  /@go-ui/core@1.29.3:
-    resolution: {integrity: sha512-tUrCCaGfVH53vWQpe0TwIl3GJZ9upNrOmrAsCnRoD4JoW8Thxf3CoaKT88oovGgGw3iIpy9f2AiVP2++c/fEHQ==}
+  /@go-ui/core@1.34.1:
+    resolution: {integrity: sha512-hkMHind+8+D8rmUJwYrhLmVjHpijFGjeWd3em0KjiUMRcy1XbxUcDr6zkpRdm/ZWT7cWCLigo561qpFrTqBz2w==}
     dependencies:
       '@duetds/date-picker': 1.4.0
       '@floating-ui/dom': 1.2.6
       body-scroll-lock: 4.0.0-beta.0
+      dayjs: 1.11.10
       dompurify: 2.4.5
       json5: 2.2.3
       lodash-es: 4.17.21
@@ -302,11 +303,14 @@ packages:
       open-props: 1.5.7
     dev: false
 
-  /@go-ui/vue@1.29.3:
-    resolution: {integrity: sha512-iGiSJJ/HMD55ZCo3zXAHnAlRQx0SlmipmiLFfW4Z3vdU3jxakUG8PtMZm5ZOoKsdm9CA2YDRJlt/0ks0iiQK3g==}
+  /@go-ui/vue@1.34.1(vue@3.2.41):
+    resolution: {integrity: sha512-LiZse0Lc8wQNvGJCPwCIpKdCi8AuZJER07vk6FuSCdc+qgl9KP3M0xD0FF87M0mNC4haFnWQaglrlYmIQkYpzg==}
+    peerDependencies:
+      vue: ^3.3.4
     dependencies:
       '@duetds/date-picker': 1.4.0
-      '@go-ui/core': 1.29.3
+      '@go-ui/core': 1.34.1
+      vue: 3.2.41
     dev: false
 
   /@stencil/core@2.22.3:
@@ -532,6 +536,10 @@ packages:
 
   /csstype@2.6.21:
     resolution: {integrity: sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==}
+
+  /dayjs@1.11.10:
+    resolution: {integrity: sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==}
+    dev: false
 
   /dayjs@1.11.8:
     resolution: {integrity: sha512-LcgxzFoWMEPO7ggRv1Y2N31hUf2R0Vj7fuy/m+Bg1K8rr+KAs1AEy4y9jd5DXe8pbHgX+srkHNS7TH6Q6ZhYeQ==}
