@@ -23,7 +23,7 @@
           flat
           compact
           @click="() => themeStore.toggle()">
-          <GoIcon size="1.5rem" icon-set="bx" :name="themeStore.icon"></GoIcon>
+          <GoIcon size="1.5rem" :name="themeStore.icon"></GoIcon>
         </GoButton>
       </div>
 
