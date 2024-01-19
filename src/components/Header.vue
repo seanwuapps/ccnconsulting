@@ -1,7 +1,7 @@
 <template>
   <header>
     <GoSkipLink to="main">Skip to main</GoSkipLink>
-    <GoNavDrawer ref="mobileMenu" label="Menu" :items="navItems" />
+    <GoNavDrawer ref="mobileMenu" label="Menu" .items="navItems" />
     <GoHeaderBar breakpoint="tablet">
       <GoGovAuLogo slot="logo" href="/">
         <img slot="main-brand" :src="logoSrc" alt="CCN Consulting Pty Ltd" />

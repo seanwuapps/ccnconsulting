@@ -107,6 +107,7 @@ export default defineComponent({
       return this.jobStore.currentJob;
     },
     mailToLink() {
+      if (!this.job) return '';
       const linkToJob = `${window.location.protocol}//${window.location.host}/jobs/${this.job.slug}`;
       return `mailto:hello@ccnconsulting.com.au?subject=Interested%20in%${this.job.title}&body=Hi%2C%0A%0AMy%20name%20is%20%7BYOUR_NAME_HERE%7D%2C%20and%20im%20interested%20in%20your%20job%20${this.job.title}%20at%20${linkToJob}%0A%0A%0AMy%20preferred%20contact%20number%20is%20%7BYOUR_NUMBER%7D%0A%0A----%0A%0A%7BPLEASE%20ATTACH_YOUR_CV%7D%0A`;
     },

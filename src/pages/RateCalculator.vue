@@ -3,13 +3,13 @@
     <h1>Rate calculator</h1>
     <div class="row">
       <div class="col-desktop-8">
-        <div class="mt-4">
+        <div class="mb-4">
           <GoInput type="number" label="Department rate" v-model="departmentRate">
             <span slot="prefix">$</span>
             <span slot="suffix">/hr</span>
           </GoInput>
         </div>
-        <div class="mt-4 row">
+        <div class="mb-4 row">
           <div class="col-6">
             <GoInput type="number" label="Fee (%)" v-model="marginPercent">
               <span slot="suffix">%</span>
@@ -21,20 +21,35 @@
             </GoInput>
           </div>
         </div>
-        <div class="mt-4">
+        <div class="mb-4">
           <GoSwitch label="Calculate payroll tax" v-model="usePayrollTax" />
         </div>
-        <div class="mt-4">
+        <div class="mb-4">
           <GoSwitch label="Use CCN as Payroll company" v-model="usePayroll" />
         </div>
-        <div class="mt-2" v-if="usePayroll">
+        <div class="mb-2" v-if="usePayroll">
           <GoInput type="number" label="Payroll fee (%)" v-model="payrollFeePercent">
             <span slot="suffix">%</span>
           </GoInput>
         </div>
       </div>
+      <div class="col-desktop-4">
+        <GoInput label="Candidate name" v-model="candidateName" />
+        <GoButton :disabled="!candidateName" type="button" variant="primary" block="all" @click="openShareDialog">
+          <GoIcon decorative name="share" size="1em" slot="prefix"></GoIcon>
+          Share</GoButton
+        >
+        <GoDialog ref="shareDialog" :heading="`Share with ${candidateName}`">
+          <div class="input-group">
+            <GoInput label="Link" :value="shareLink" readonly />
+            <GoButton variant="primary" class="mb-2" @click="copyShareLink">Copy</GoButton>
+          </div>
+          <div v-show="copyMessage">{{ copyMessage }}</div>
+        </GoDialog>
+      </div>
     </div>
 
+    <hr />
     <div class="mt-4 mb-4">
       <h4>Rate breakdown</h4>
       <go-table-wrapper bordered striped>
@@ -126,7 +141,7 @@
 </template>
 
 <script lang="ts" setup>
-import { GoInput, GoSwitch } from '@go-ui/vue';
+import { GoInput, GoSwitch, GoButton, GoDialog, GoIcon } from '@go-ui/vue';
 import { defineComponent } from 'vue';
 </script>
 
@@ -150,6 +165,9 @@ export default defineComponent({
       superanuationPercent: 11,
       usePayrollTax: false,
       payrollTaxPercent: 6.85,
+      candidateName: '',
+      shareLink: '',
+      copyMessage: '',
     };
   },
   computed: {
@@ -179,6 +197,58 @@ export default defineComponent({
     toMoney(number: number) {
       return formatter.format(number);
     },
+    openShareDialog() {
+      this.copyMessage = '';
+      // build sharelink
+      this.shareLink = this.buildShareLink();
+      (this.$refs.shareDialog as any).$el.open();
+    },
+    buildShareLink() {
+      const {
+        departmentRate,
+        marginPercent,
+        marginDollar,
+        usePayroll,
+        payrollFeePercent,
+        superanuationPercent,
+        usePayrollTax,
+        payrollTaxPercent,
+        candidateName,
+      } = this;
+      const encodedParam = btoa(
+        JSON.stringify({
+          departmentRate,
+          marginPercent,
+          marginDollar,
+          usePayroll,
+          payrollFeePercent,
+          superanuationPercent,
+          usePayrollTax,
+          payrollTaxPercent,
+          candidateName,
+        })
+      );
+      return `${window.location.origin}/candidate-rate/${encodedParam}`;
+    },
+    copyShareLink() {
+      this.copyMessage = '';
+      try {
+        navigator.clipboard.writeText(this.buildShareLink());
+        this.copyMessage = `Link copied to clipboard!`;
+      } catch (e) {
+        this.copyMessage = `Copy failed, please manually copy from the field above.`;
+      }
+    },
   },
 });
 </script>
+<style lang="scss">
+.input-group {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  go-input {
+    flex: 1;
+  }
+}
+</style>

@@ -11,6 +11,10 @@ const routes = [
     path: '/rate-calculator',
     component: () => import('@/pages/RateCalculator.vue'),
   },
+  {
+    path: '/candidate-rate/:encodedParams',
+    component: () => import('@/pages/CandidateRate.vue'),
+  },
 ];
 
 const router = createRouter({

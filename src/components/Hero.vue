@@ -96,7 +96,7 @@ export default defineComponent({
 <style lang="scss">
 #app {
   .home-hero {
-    --hero-text-box-padding: 30vh 0;
+    --hero-text-box-padding: 20vh 0;
     overflow: hidden;
   }
   go-hero {
@@ -138,9 +138,9 @@ export default defineComponent({
             font-family: monospace;
             background-image: radial-gradient(
               circle farthest-corner at var(--x) var(--y),
-              rgba(var(--go-token-lightest), 1) 0%,
+              rgba(var(--go-token-success-500), 1) 0%,
               rgba(var(--go-token-secondary-400), 0.6) 20%,
-              rgba(var(--go-token-success-600), 0.9) 50%,
+              rgba(var(--go-token-success-700), 0.9) 50%,
               transparent 100%
             );
             user-select: none; // chrome and Opera
