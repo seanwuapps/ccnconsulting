@@ -1,9 +1,9 @@
 <template>
   <router-link custom v-slot="{ href, navigate }" :to="`/jobs/${job.slug}`">
-    <GoCard
+    <go-card
       v-bind="$attrs"
-      :card-title="job.title"
-      :card-subtitle="job.buyer"
+      :heading="job.title"
+      :sub-heading="job.buyer"
       heading-tag="h3"
       :href="href"
       @click="navigate"
@@ -11,13 +11,13 @@
       border
       :class="{ 'job-card': true, closed: job.isClosed }">
       <div class="job-card-chip" slot="pre-title">
-        <GoChip variant="info" v-if="!job.isClosed">
+        <go-chip variant="info" v-if="!job.isClosed">
           <div>Closing {{ job.closingDateRelative }}</div>
-        </GoChip>
+        </go-chip>
         <GoChip v-else variant="neutral">Closed</GoChip>
       </div>
       <div slot="footer">Published on {{ job.publishedDate }}</div>
-    </GoCard>
+    </go-card>
   </router-link>
 </template>
 

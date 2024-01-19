@@ -24,7 +24,7 @@ console.groupEnd();
   <div class="home">
     <Hero />
     <div id="main-content">
-      <BgLine />
+      <!-- <BgLine /> -->
       <div class="container section" id="about">
         <h2>About</h2>
         <go-md :content="content.about"></go-md>

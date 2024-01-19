@@ -6,7 +6,7 @@ settings:
 
 dependencies:
   '@go-ui/vue':
-    specifier: ^1.34.1
+    specifier: ^1.33.1
     version: 1.34.1(vue@3.2.41)
   airtable:
     specifier: ^0.12.1

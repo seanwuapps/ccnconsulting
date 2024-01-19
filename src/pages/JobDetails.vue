@@ -15,7 +15,7 @@
             <GoIcon slot="prefix" icon-set="bx" name="chat" size="1.5em" />
             <span>I'm interested</span>
           </GoButton>
-          <GoButton v-else variant="neutral" block="all" disabled>This job is closed</GoButton>
+          <p v-else>This job is closed</p>
         </div>
         <ul slot="intro" class="feature-list">
           <li>
@@ -35,7 +35,7 @@
 
         <div>
           <!-- info banner -->
-          <GoCard class="mb-4" card-title="Contract information">
+          <GoCard border class="mb-4" heading="Contract information">
             <ul class="info-list">
               <li>
                 <strong>Contract duration</strong>
@@ -127,7 +127,6 @@ ul.feature-list {
 }
 .info-list {
   padding: 0;
-  border: 1px solid var(--go-color-neutral-100);
   border-radius: var(--radius-2);
   list-style: none;
   padding: 0;
@@ -142,7 +141,7 @@ ul.feature-list {
     }
   }
   li:nth-child(2n-1) {
-    background: var(--go-color-neutral-100);
+    background: var(--go-color-neutral-200);
   }
 }
 </style>

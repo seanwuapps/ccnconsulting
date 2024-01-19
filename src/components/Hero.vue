@@ -1,7 +1,7 @@
 <template>
   <GoHero
     :heading="content.hero.heading"
-    class="hero"
+    class="home-hero"
     @mousemove="handleMouseMove"
     @touchmove="handleTouchMove"
     ref="hero">
@@ -25,7 +25,7 @@ import { GoHero, GoMd } from '@go-ui/vue';
 import content from '../content';
 const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-function makeString(length = 4000) {
+function makeString(length = 8000) {
   let result = '';
   const charactersLength = characters.length;
   let counter = 0;
@@ -95,11 +95,12 @@ export default defineComponent({
 
 <style lang="scss">
 #app {
-  .hero {
+  .home-hero {
+    --hero-text-box-padding: 30vh 0;
     overflow: hidden;
   }
   go-hero {
-    --hero-text-box-padding: 2rem 0;
+    --hero-text-box-padding: 6rem 0 4rem;
     --hero-text-flex-basis: 100%;
     --hero-image-flex-basis: 0;
     .hero-text {

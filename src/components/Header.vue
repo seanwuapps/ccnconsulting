@@ -38,7 +38,7 @@
         <GoIcon icon-set="bx" name="menu" size="1.5rem" slot="prefix"></GoIcon>
       </GoButton>
 
-      <GoMainNav slot="main-nav" :items="navItems"></GoMainNav>
+      <GoMainNav slot="main-nav" .items="navItems"></GoMainNav>
     </GoHeaderBar>
   </header>
 </template>
