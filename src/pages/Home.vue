@@ -66,5 +66,9 @@ html {
 }
 #main-content {
   position: relative;
+  margin-top: 100vh;
+  background: linear-gradient(to bottom, transparent 0%, var(--go-color-bg) 10%);
+  backdrop-filter: blur(10px);
+
 }
 </style>

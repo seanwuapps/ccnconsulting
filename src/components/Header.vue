@@ -97,6 +97,17 @@ export default defineComponent({
     GoSkipLink,
     GoNavDrawer,
   },
+  mounted() {
+    const header = document.querySelector('go-header-bar') as HTMLElement;
+
+    const observer = new ResizeObserver(() => {
+      const h = header.getBoundingClientRect().height;
+      // set header height as css variable
+      document.documentElement.style.setProperty('--header-height', `${h}px`);
+    });
+    observer.observe(header);
+
+  }
 });
 </script>
 

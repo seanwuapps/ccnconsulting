@@ -8,7 +8,7 @@
     </div>
     <div class="hero-content">
       <h1 class="hero-title">
-        <span class="text-animate">Impactful collaboration</span>
+        <span class="text-animate">IMPACTFUL COLLABORATION</span>
       </h1>
       <p class="hero-description">
         Outcome driven consulting services for digital projects
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 
 const heroSection = ref(null);
 
@@ -29,13 +29,17 @@ const heroSection = ref(null);
 
 <style scoped lang="scss">
 .hero {
-  min-height: 90vh;
+  height: calc(100vh - var(--header-height));
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   background: #0f172a;
   overflow: hidden;
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
 }
 
 .hero-bg {
@@ -122,8 +126,8 @@ const heroSection = ref(null);
 .hero-title {
   font-size: var(--go-size-6);
   font-family: 'Oswald', sans-serif;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   color: #f8fafc;
   margin-bottom: 1.5rem;
   line-height: 1.1;
@@ -143,6 +147,7 @@ const heroSection = ref(null);
 
 .hero-description {
   font-size: 1.25rem;
+  text-wrap: balance;
   color: #94a3b8;
   margin-bottom: 2.5rem;
   line-height: 1.6;
@@ -273,7 +278,7 @@ const heroSection = ref(null);
   }
 
   .hero-title {
-    font-size: var(--go-size-4);
+    font-size: var(--go-size-5);
     letter-spacing: 0.05em;
     margin-bottom: 1rem;
   }
