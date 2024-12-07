@@ -1,159 +1,314 @@
 <template>
-  <GoHero
-    :heading="content.hero.heading"
-    class="home-hero"
-    @mousemove="handleMouseMove"
-    @touchmove="handleTouchMove"
-    ref="hero">
-    <div
-      aria-hidden="true"
-      id="bg-wrap"
-      slot="full-width-bg"
-      :style="{
-        '--x': `${x}px`,
-        '--y': `${y}px`,
-      }">
-      {{ letters }}
+  <section class="hero" ref="heroSection">
+    <div class="hero-bg">
+      <div class="stripe" v-for="n in 8" :key="n"></div>
+      <div class="circles">
+        <div class="circle" v-for="n in 3" :key="n"></div>
+      </div>
     </div>
-    <GoMd md-options="{html: true}" :content="content.hero.description"></GoMd>
-  </GoHero>
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="text-animate">Impactful collaboration</span>
+      </h1>
+      <p class="hero-description">
+        Outcome driven consulting services for digital projects
+      </p>
+      <a href="#contact-us" class="cta-button">
+        Let's talk
+      </a>
+    </div>
+  </section>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { GoHero, GoMd } from '@go-ui/vue';
-import content from '../content';
-const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+<script setup>
+import { ref, onMounted } from 'vue';
 
-function makeString(length = 8000) {
-  let result = '';
-  const charactersLength = characters.length;
-  let counter = 0;
-  while (counter < length) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    counter += 1;
-  }
-  return result;
-}
+const heroSection = ref(null);
 
-const strings = Array.from({ length: 20 }, makeString);
-
-export default defineComponent({
-  setup() {
-    return {
-      content,
-    };
-  },
-  components: {
-    GoHero,
-    GoMd,
-  },
-  data() {
-    return {
-      letters: makeString(),
-      heroBgRect: null as DOMRect | null,
-      x: 0,
-      y: 0,
-      reduceMotion: false,
-      index: 0,
-    };
-  },
-  mounted() {
-    this.heroBgRect = (this.$refs.hero as InstanceType<typeof GoHero>).$el.getBoundingClientRect();
-    this.setLetters();
-    this.reduceMotion = window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;
-  },
-  methods: {
-    setLetters() {
-      this.letters = strings[this.index];
-      this.index = (this.index + 1) % strings.length;
-    },
-    handleMouseMove(e) {
-      const { clientX, clientY } = e;
-      this.setXY(clientX, clientY);
-    },
-    handleTouchMove(e) {
-      const { clientX, clientY } = e.touches[0];
-      this.setXY(clientX, clientY);
-    },
-    setXY(clientX = 0, clientY = 0) {
-      if (this.reduceMotion) {
-        return;
-      }
-      if (!this.heroBgRect) {
-        return;
-      }
-      this.setLetters();
-
-      const { left, top } = this.heroBgRect;
-      this.x = clientX - left;
-      this.y = clientY - top - 40;
-    },
-  },
-});
 </script>
 
-<style lang="scss">
-#app {
-  .home-hero {
-    --hero-text-box-padding: 20vh 0;
-    overflow: hidden;
-  }
-  go-hero {
-    --hero-text-box-padding: 6rem 0 4rem;
-    --hero-text-flex-basis: 100%;
-    --hero-image-flex-basis: 0;
-    .hero-text {
-      font-weight: normal;
-      backdrop-filter: none;
-    }
-    .hero-text-bg {
-      display: none;
-    }
-  }
-  .home {
-    go-hero {
-      --hero-full-width-bg-padding: 0;
-      --hero-bg-color: black;
-      --hero-fg-color: white;
-      .hero-text {
-        text-align: center;
-        text-shadow: 0 0 1rem var(--hero-fg-color);
-      }
-      .full-width-bg {
-        transform: none;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        #bg-wrap {
-          display: none;
-          @supports (background-clip: text) or (-webkit-background-clip: text) {
-            --x: 50%;
-            --y: 50%;
-            aspect-ratio: 1;
-            display: block;
-            word-break: break-all;
-            font-size: clamp(1rem, 0.8vw, 2rem);
-            font-family: monospace;
-            background-image: radial-gradient(
-              circle farthest-corner at var(--x) var(--y),
-              rgba(var(--go-token-success-500), 1) 0%,
-              rgba(var(--go-token-secondary-400), 0.6) 20%,
-              rgba(var(--go-token-success-700), 0.9) 50%,
-              transparent 100%
-            );
-            user-select: none; // chrome and Opera
-            -moz-user-select: none; // Firefox
-            -webkit-text-select: none; // IOS Safari
-            -webkit-user-select: none; // Safari
-            -webkit-background-clip: text; /* clip the background to the text inside the tag*/
-            -webkit-text-fill-color: transparent;
-            opacity: 0.4;
-          }
-        }
+<style scoped lang="scss">
+.hero {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #0f172a;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.stripe {
+  position: absolute;
+  width: 120%;
+  height: 180px;
+  background: linear-gradient(90deg, 
+    rgba(56, 189, 248, 0.01) 0%,
+    rgba(56, 189, 248, 0.08) 50%,
+    rgba(56, 189, 248, 0.01) 100%
+  );
+  transform: rotate(-35deg);
+  transition: transform 0.3s ease;
+
+  @for $i from 1 through 8 {
+    &:nth-child(#{$i}) {
+      top: #{($i - 1) * 15}vh;
+      height: #{120 + random(100)}px;
+      opacity: #{0.1 + random(5) * 0.02};
+      animation: stripeFloat #{8 + $i * 0.5}s ease-in-out infinite;
+      animation-delay: #{$i * -0.7}s;
+      
+      @if $i % 2 == 0 {
+        animation-direction: reverse;
       }
     }
+  }
+}
+
+.circles {
+  position: absolute;
+  inset: 0;
+  filter: blur(60px);
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+
+  &:nth-child(1) {
+    width: 400px;
+    height: 400px;
+    background: rgba(56, 189, 248, 0.15);
+    top: -100px;
+    right: -100px;
+    animation: float 15s ease-in-out infinite;
+  }
+
+  &:nth-child(2) {
+    width: 300px;
+    height: 300px;
+    background: rgba(14, 165, 233, 0.15);
+    bottom: -50px;
+    left: -50px;
+    animation: float 12s ease-in-out infinite reverse;
+  }
+
+  &:nth-child(3) {
+    width: 200px;
+    height: 200px;
+    background: rgba(2, 132, 199, 0.15);
+    top: 40%;
+    left: 60%;
+    animation: float 10s ease-in-out infinite;
+    animation-delay: -5s;
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-title {
+  font-size: var(--go-size-6);
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #f8fafc;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  
+  .text-animate {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+    background: linear-gradient(90deg, #f8fafc, #38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    animation: fadeInUp 0.8s ease forwards, gradientMove 3s ease infinite;
+  }
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  color: #94a3b8;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards 0.3s;
+}
+
+.cta-button {
+  padding: 1.25rem 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-round);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards 0.6s;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  color: white;
+  box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  .icon {
+    width: 1.25em;
+    height: 1.25em;
+    transition: transform 0.3s ease;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, 
+      transparent 20%,
+      rgba(255, 255, 255, 0.1) 40%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0.1) 60%,
+      transparent 80%
+    );
+    transform: translateX(-100%) skewX(-25deg);
+    transition: transform 0.75s ease;
+  }
+
+  &::after {
+    background: linear-gradient(135deg,
+      rgba(56, 189, 248, 0) 20%,
+      rgba(56, 189, 248, 0.1) 40%,
+      rgba(56, 189, 248, 0.2) 50%,
+      rgba(56, 189, 248, 0.1) 60%,
+      rgba(56, 189, 248, 0) 80%
+    );
+    transform: translateX(100%) skewX(-25deg);
+    transition-delay: 0.2s;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #0ea5e9, #0284c7);
+    box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3),
+                0 0 0 2px rgba(56, 189, 248, 0.2);
+    
+    &::before {
+      transform: translateX(100%) skewX(-25deg);
+    }
+    
+    &::after {
+      transform: translateX(-100%) skewX(-25deg);
+    }
+    .icon {
+      transform: translateX(4px);
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2),
+                0 0 0 3px rgba(56, 189, 248, 0.3);
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(30px, -30px);
+  }
+}
+
+@keyframes stripeFloat {
+  0%, 100% {
+    transform: rotate(-35deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-35deg) translateY(-#{random(40) + 20}px);
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero-content {
+    padding: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: var(--go-size-4);
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+  }
+
+  .cta-button {
+    padding: 1rem 1.75rem;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero-content {
+    padding: 1rem;
+  }
+
+  .hero-title {
+    font-size: var(--go-size-3);
+    letter-spacing: 0.03em;
+  }
+
+  .hero-description {
+    font-size: 0.875rem;
+    padding: 0 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.875rem;
   }
 }
 </style>

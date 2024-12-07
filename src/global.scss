@@ -1,5 +1,7 @@
 :root {
   --go-heading-font-family: 'Raleway', sans-serif;
+  --go-color-bg: light-dark(white, hsl(249, 66%, 6%));
+  --go-color-link-hover-bg: light-dark(hsl(240, 100%, 95%), hsl(249, 66%, 10%));
 }
 main {
   font-weight: 300;

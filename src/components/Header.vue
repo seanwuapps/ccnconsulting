@@ -105,7 +105,7 @@ export default defineComponent({
   font-weight: bold;
   font-family: var(--go-heading-font-family);
 }
-app-header {
+header {
   position: sticky;
   top: 0;
   background: var(--go-color-bg);
