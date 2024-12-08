@@ -53,9 +53,9 @@ const heroSection = ref(null);
   width: 120%;
   height: 180px;
   background: linear-gradient(90deg, 
-    rgba(56, 189, 248, 0.01) 0%,
-    rgba(56, 189, 248, 0.08) 50%,
-    rgba(56, 189, 248, 0.01) 100%
+    rgba(56, 189, 248, 0.02) 0%,
+    rgba(56, 189, 248, 0.15) 50%,
+    rgba(56, 189, 248, 0.02) 100%
   );
   transform: rotate(-35deg);
   transition: transform 0.3s ease;
@@ -64,7 +64,7 @@ const heroSection = ref(null);
     &:nth-child(#{$i}) {
       top: #{($i - 1) * 15}vh;
       height: #{120 + random(100)}px;
-      opacity: #{0.1 + random(5) * 0.02};
+      opacity: #{0.15 + random(5) * 0.03};
       animation: stripeFloat #{8 + $i * 0.5}s ease-in-out infinite;
       animation-delay: #{$i * -0.7}s;
       
