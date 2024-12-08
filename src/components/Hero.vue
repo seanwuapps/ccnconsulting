@@ -11,7 +11,9 @@
         <span class="text-animate">IMPACTFUL COLLABORATION</span>
       </h1>
       <p class="hero-description">
-        Outcome driven consulting services for digital projects
+        <span>
+          Connecting <FlippingWord :words="['talents', 'vision', 'strategy', 'ideas']" /> and <FlippingWord :words="['purpose', 'execution', 'results', 'innovation']" />
+        </span>
       </p>
       <a href="#contact-us" class="cta-button">
         Let's talk
@@ -22,6 +24,7 @@
 
 <script setup>
 import { ref, onMounted, nextTick } from 'vue';
+import FlippingWord from './FlippingWord.vue';
 
 const heroSection = ref(null);
 
@@ -34,7 +37,7 @@ const heroSection = ref(null);
   align-items: center;
   justify-content: center;
   position: relative;
-  background: #0f172a;
+  background: light-dark(#f9f8ff, #0f172a);
   overflow: hidden;
   position: fixed;
   top: var(--header-height);
@@ -49,13 +52,16 @@ const heroSection = ref(null);
 }
 
 .stripe {
+  --stripe-gradient-1: light-dark(rgba(56, 191, 248, 0.492), rgba(56, 189, 248, 0.02));
+  --stripe-gradient-2: light-dark(rgba(31, 161, 216, 0.114), rgba(56, 189, 248, 0.15));
+  --stripe-gradient-3: light-dark(rgba(56, 191, 248, 0.012), rgba(56, 189, 248, 0.02));
   position: absolute;
   width: 120%;
   height: 180px;
-  background: linear-gradient(90deg, 
-    rgba(56, 189, 248, 0.02) 0%,
-    rgba(56, 189, 248, 0.15) 50%,
-    rgba(56, 189, 248, 0.02) 100%
+  background: linear-gradient(-35deg, 
+     var(--stripe-gradient-1) 0%,
+     var(--stripe-gradient-2) 50%,
+     var(--stripe-gradient-3) 100%
   );
   transform: rotate(-35deg);
   transition: transform 0.3s ease;
@@ -124,11 +130,13 @@ const heroSection = ref(null);
 }
 
 .hero-title {
+  --title-text-color: light-dark(#060123, #f8fafc);
+  --title-text-gradient-alt-color: light-dark( #a72ebd, #0ea5e9);
   font-size: var(--go-size-6);
   font-family: 'Oswald', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
-  color: #f8fafc;
+  color: var(--title-text-color);
   margin-bottom: 1.5rem;
   line-height: 1.1;
   
@@ -137,7 +145,7 @@ const heroSection = ref(null);
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.8s ease forwards;
-    background: linear-gradient(90deg, #f8fafc, #38bdf8);
+    background: linear-gradient(90deg, var(--title-text-color), var(--title-text-gradient-alt-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 200% 100%;
