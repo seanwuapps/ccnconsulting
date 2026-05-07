@@ -34,11 +34,14 @@
         </div>
       </div>
       <div class="col-desktop-4">
+        <!-- <GoInput type="number" label="Super percentage" v-model="superanuationPercent">
+          <span slot="suffix">%</span>
+        </GoInput> -->
         <GoInput label="Candidate name" v-model="candidateName" />
         <GoButton :disabled="!candidateName" type="button" variant="primary" block="all" @click="openShareDialog">
           <GoIcon decorative name="share" size="1em" slot="prefix"></GoIcon>
-          Share</GoButton
-        >
+          Share
+        </GoButton>
         <GoDialog ref="shareDialog" :heading="`Share with ${candidateName}`">
           <div class="input-group">
             <GoInput label="Link" :value="shareLink" readonly />
@@ -52,32 +55,9 @@
     <hr />
     <div class="mt-4 mb-4">
       <h4>Rate breakdown</h4>
-      <go-table-wrapper bordered striped>
-        <table>
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>$ Value (GST excl.)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Invoice to department</td>
-              <td>
-                {{ toMoney(departmentRate) }}
-              </td>
-            </tr>
-            <tr>
-              <td>CCN fee</td>
-              <td>{{ toMoney(ccnFee) }}</td>
-            </tr>
-            <tr>
-              <td>To candidate before payroll</td>
-              <td>{{ toMoney(candidateRate) }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </go-table-wrapper>
+
+      <RateBreakdownTable :department-rate="departmentRate" :ccn-fee="ccnFee"
+        :payrollStartingRate="payrollStartingRate" />
 
       <div class="mt-2" v-if="usePayrollTax">
         <h4>Payroll tax</h4>
@@ -90,11 +70,11 @@
               </tr>
               <tr>
                 <td>ACT Payroll Tax Payable</td>
-                <td>{{ toMoney(payrollTax) }} (Candidate rate * payroll tax rate)</td>
+                <td>{{ toMoneyFormat(payrollTax) }} (Candidate rate * payroll tax rate)</td>
               </tr>
               <tr>
                 <td>Candidate rate after payroll tax</td>
-                <td>{{ toMoney(payrollStartingRate) }}</td>
+                <td>{{ toMoneyFormat(payrollStartingRate) }}</td>
               </tr>
             </tbody>
           </table>
@@ -103,52 +83,22 @@
 
       <div class="mt-2" v-if="usePayroll">
         <h4>Payroll breakdown</h4>
-        <go-table-wrapper bordered striped>
-          <table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>$ Value (GST excl.)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Total value</td>
-                <td>{{ toMoney(payrollStartingRate) }}</td>
-              </tr>
-              <tr>
-                <td>CCN Payroll fee</td>
-                <td>{{ toMoney(payrollFee) }} ({{ payrollFeePercent }}%)</td>
-              </tr>
-
-              <tr>
-                <td>Candidate rate inc. super</td>
-                <td>
-                  <strong>{{ toMoney(rateIncludingSuper) }}</strong>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </go-table-wrapper>
+        <PayrollBreakdownTable :payrollStartingRate="payrollStartingRate" :payrollFee="payrollFee"
+          :payrollFeePercent="payrollFeePercent" />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import RateBreakdownTable from '@/components/RateBreakdownTable.vue';
+import PayrollBreakdownTable from '@/components/PayrollBreakdownTable.vue';
+import { toMoneyFormat } from '@/utils/toMoney';
 import { GoInput, GoSwitch, GoButton, GoDialog, GoIcon } from '@go-ui/vue';
 import { defineComponent } from 'vue';
 </script>
 
 <script lang="ts">
-const formatter = new Intl.NumberFormat('en-AU', {
-  style: 'currency',
-  currency: 'AUD',
-
-  // These options are needed to round to whole numbers if that's what you want.
-  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-});
 export default defineComponent({
   data() {
     return {
@@ -157,7 +107,7 @@ export default defineComponent({
       marginDollar: 5,
       usePayroll: true,
       payrollFeePercent: 1.5,
-      superanuationPercent: 11,
+      superanuationPercent: 12,
       usePayrollTax: false,
       payrollTaxPercent: 6.85,
       candidateName: '',
@@ -175,9 +125,6 @@ export default defineComponent({
     payrollFee() {
       return (this.candidateRate * Number(this.payrollFeePercent)) / 100;
     },
-    rateIncludingSuper() {
-      return this.payrollStartingRate - this.payrollFee;
-    },
     payrollTax() {
       return (this.candidateRate * Number(this.payrollTaxPercent)) / 100;
     },
@@ -187,7 +134,7 @@ export default defineComponent({
   },
   methods: {
     toMoney(number: number) {
-      return formatter.format(number);
+      return toMoneyFormat(number);
     },
     openShareDialog() {
       this.copyMessage = '';
@@ -239,6 +186,7 @@ export default defineComponent({
   display: flex;
   align-items: flex-end;
   gap: 1rem;
+
   go-input {
     flex: 1;
   }

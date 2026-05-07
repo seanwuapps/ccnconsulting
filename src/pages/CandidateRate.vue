@@ -39,32 +39,9 @@
 
       <div class="mt-4 mb-4">
         <h4>Rate breakdown</h4>
-        <go-table-wrapper bordered striped>
-          <table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>$ Value (GST excl.)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Invoice to department</td>
-                <td>
-                  {{ toMoney(departmentRate) }}
-                </td>
-              </tr>
-              <tr>
-                <td>CCN fee</td>
-                <td>{{ toMoney(ccnFee) }}</td>
-              </tr>
-              <tr>
-                <td>To candidate before payroll</td>
-                <td>{{ toMoney(candidateRate) }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </go-table-wrapper>
+        <RateBreakdownTable :department-rate="departmentRate" :ccn-fee="ccnFee"
+          :payrollStartingRate="payrollStartingRate" />
+
 
         <div class="mt-2" v-if="usePayrollTax">
           <h4>Payroll tax</h4>
@@ -90,33 +67,9 @@
 
         <div class="mt-2" v-if="usePayroll">
           <h4>Payroll breakdown</h4>
-          <go-table-wrapper bordered striped>
-            <table>
-              <thead>
-                <tr>
-                  <th>Item</th>
-                  <th>$ Value (GST excl.)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Total value</td>
-                  <td>{{ toMoney(payrollStartingRate) }}</td>
-                </tr>
-                <tr>
-                  <td>CCN Payroll fee</td>
-                  <td>{{ toMoney(payrollFee) }} ({{ payrollFeePercent }}%)</td>
-                </tr>
 
-                <tr>
-                  <td>Candidate rate inc. super</td>
-                  <td>
-                    <strong>{{ toMoney(rateIncludingSuper) }}</strong>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </go-table-wrapper>
+          <PayrollBreakdownTable :payrollStartingRate="payrollStartingRate" :payrollFee="payrollFee"
+            :payrollFeePercent="payrollFeePercent" />
         </div>
       </div>
     </div>
@@ -124,6 +77,8 @@
 </template>
 
 <script lang="ts" setup>
+import RateBreakdownTable from '@/components/RateBreakdownTable.vue';
+import PayrollBreakdownTable from '@/components/PayrollBreakdownTable.vue';
 import { GoHero, GoInput, GoSwitch } from '@go-ui/vue';
 import { defineComponent } from 'vue';
 </script>
@@ -140,14 +95,14 @@ const formatter = new Intl.NumberFormat('en-AU', {
 export default defineComponent({
   data() {
     return {
-      departmentRate: 100,
-      marginPercent: 5,
-      marginDollar: 5,
-      usePayroll: true,
-      payrollFeePercent: 1.5,
-      superanuationPercent: 11,
+      departmentRate: 0,
+      marginPercent: 0,
+      marginDollar: 0,
+      usePayroll: false,
+      payrollFeePercent: 0,
+      superanuationPercent: 0,
       usePayrollTax: false,
-      payrollTaxPercent: 6.85,
+      payrollTaxPercent: 0,
       candidateName: '',
       parsedParams: null,
     };
@@ -156,6 +111,9 @@ export default defineComponent({
     const params = atob(String(this.$route.params.encodedParams));
     try {
       this.parsedParams = JSON.parse(params);
+      if (!this.parsedParams) {
+        return;
+      }
       this.departmentRate = Number(this.parsedParams.departmentRate);
       this.marginPercent = Number(this.parsedParams.marginPercent);
       this.marginDollar = Number(this.parsedParams.marginDollar);
