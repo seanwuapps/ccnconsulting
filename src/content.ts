@@ -11,7 +11,7 @@ Outcome driven consulting services for digital projects
 `,
   },
   about: `
-We provide full-stack digital consulting services to help you deliver successful projects. We work with our clients from start to finish, guiding them through the process of developing a project's strategy and delivering the final product.
+We provide digital consulting services to help your organisation deliver successful projects. We work with our clients from start to finish, guiding them through the process of developing a project's strategy and delivering the final product.
   `,
   services: [
     {
