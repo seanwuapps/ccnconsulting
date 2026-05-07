@@ -38,10 +38,8 @@
       </div> -->
 
       <div class="mt-4 mb-4">
-        <h4>Rate breakdown</h4>
         <RateBreakdownTable :department-rate="departmentRate" :ccn-fee="ccnFee"
           :payrollStartingRate="payrollStartingRate" />
-
 
         <div class="mt-2" v-if="usePayrollTax">
           <h4>Payroll tax</h4>
@@ -66,8 +64,6 @@
         </div>
 
         <div class="mt-2" v-if="usePayroll">
-          <h4>Payroll breakdown</h4>
-
           <PayrollBreakdownTable :payrollStartingRate="payrollStartingRate" :payrollFee="payrollFee"
             :payrollFeePercent="payrollFeePercent" />
         </div>

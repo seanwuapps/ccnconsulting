@@ -1,25 +1,28 @@
 <template>
-  <go-table-wrapper bordered striped>
-    <table>
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>$ Value (GST excl.)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><b>Candidate rate inc. super</b></td>
-          <td><b>{{ toMoneyFormat(payrollStartingRate) }}</b></td>
-        </tr>
-        <tr>
-          <td>CCN Payroll fee</td>
-          <td>-{{ toMoneyFormat(payrollFee) }} ({{ payrollFeePercent }}%)</td>
-        </tr>
+  <section>
+    <h2>Payroll breakdown</h2>
+    <go-table-wrapper bordered striped>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>$ Value (GST excl.)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Candidate rate inc. super</b></td>
+            <td><b>{{ toMoneyFormat(payrollStartingRate) }}</b></td>
+          </tr>
+          <tr>
+            <td>CCN Payroll fee</td>
+            <td>-{{ toMoneyFormat(payrollFee) }} ({{ payrollFeePercent }}%)</td>
+          </tr>
 
-      </tbody>
-    </table>
-  </go-table-wrapper>
+        </tbody>
+      </table>
+    </go-table-wrapper>
+  </section>
 </template>
 
 <script setup lang="ts">
